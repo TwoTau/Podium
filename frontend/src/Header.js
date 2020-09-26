@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import './Header.css';
 
 class Header extends Component {
@@ -9,7 +10,7 @@ class Header extends Component {
 	render() {
 		return (
 			<div className="header">
-				<h1>Pollodium | {this.props.page}</h1>
+				<h1><Link to="/">Pollodium</Link> | {this.props.page}</h1>
 				<h1 className="username">{this.props.name || '(Not signed in)'}</h1>
 			</div>
 		);

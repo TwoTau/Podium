@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 /**
  * Props
  * - quizes: all quizes under this teacher
- * - submitQuiz: submit a quiz to be saved to db and exit current page
+ * - submitQuiz: submit a quiz to be saved to db, sets created time, and exit current page
  * - name?: string, will be non-null if editing a quiz
  */
 class CreateQuiz extends Component
@@ -25,24 +25,32 @@ class CreateQuiz extends Component
             name: this.props.name,
             quiz: quiz,
         };
+        console.log(this.state.quiz)
     }
 
     onSubmit = () => {
         this.props.submitQuiz(this.state.quiz);
     }
 
-    render() {
+    updateQuizName(event)
+    {
+        this.state.quiz.name = event.target.value;
+    }
+
+    render()
+    {
         return (
             <div className="information-text">
                 <h1>CreateQuiz</h1>
                 <h2>Quiz Name: </h2>
-                <input type='text' value={this.state.quiz.name}></input>
+                <input type='text' onChange={this.updateQuizName.bind(this)}></input>
+                <label value={this.state.quiz.name}></label>
                 <div>
                     {this.state.quiz.questions.map((curr) =>
                     {
                     })}
                 </div>
-                <button onClick={this.onSubmit}></button>
+                <button onClick={this.onSubmit}>Publish quiz</button>
             </div>
         );
     }
