@@ -45,6 +45,21 @@
 	background: #ddd;
 	transition: 0.2s;
 }
+
 .quiz-short-answer button:hover {
 	background: #ccc;
+}
+
+.podium {
+	padding: 32px;
+	margin-bottom: 32px;
+	background: #ddd;
+}
+
+.participant {
+	background: #eee;
+	margin: 16px;
+	display: flex;
+	justify-content: space-between;
+	padding: 16px;
 }
