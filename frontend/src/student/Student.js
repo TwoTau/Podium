@@ -13,7 +13,12 @@ class Student extends Component {
 		this.io = socket;
 
 		// For testing purposes. Delete later.
-		this.state = { name: 'sirknightj' }
+		this.state = {
+			name: 'sirknightj',
+			prompt: "What is 1 + 1?",
+			type: "multiple-choice",
+			answers: ["1 Lorem Ipsum is simply dummy text of the printing and typesetting industry", "2", "3", "4"],
+		};
 
 		socket.on("connect", () => {
 			this.io.send({ name: this.state.name || 'Anonymous' })
@@ -26,29 +31,21 @@ class Student extends Component {
 
 		socket.on("disconnect", (reason) => {
 			alert('Your connection to the server has been lost.')
-			console.log(reason);
+			console.log(`Your connection to the server has been lost: ${reason}`);
 			socket.open();
 		});
-
-		this.state = {
-			prompt: "What is 1 + 1?",
-			answers: ["1 Lorem Ipsum is simply dummy text of the printing and typesetting industry", "2", "3", "4"],
-		};
 	}
 
 	submit = (answer) => {
-		return this.io.send({
-			name: this.state.name || 'Anonymous',
-			prompt: this.state.prompt || 'No prompt',
-			answer: answer,
-		});
+		console.log(this.state) // TODO: Delete this line later.
+		return this.io.send({ ...this.state, answer: answer, });
 	};
 
 	render() {
 		return (
 			<div className="student">
 				<QuizQuestion prompt="What is the capital of Washington?" type="short-answer" handleSubmit={this.submit}></QuizQuestion>
-				<QuizQuestion prompt={this.state.prompt} answers={this.state.answers} type="multiple-choice" handleSubmit={this.submit}></QuizQuestion>
+				<QuizQuestion prompt={this.state.prompt} answers={this.state.answers} type={this.state.type} handleSubmit={this.submit}></QuizQuestion>
 			</div>
 		);
 	}
