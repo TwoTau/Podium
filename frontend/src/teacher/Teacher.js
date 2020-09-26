@@ -18,7 +18,19 @@ class Teacher extends Component {
         this.state = {
 			content: <StudentList />,
 			contentType: this.contentStates.STUDENT_LIST,
-        };
+			quizes: [  // Temp data, use api in future
+				{
+					name: 'quiz1',
+					id: 'quiz1id',
+					date: new Date(),
+				},
+				{
+					name: 'quiz2',
+					id: 'quiz2id',
+					date: new Date(),
+				},
+			],
+		};
 	}
 	
 	viewStudentList = () =>
@@ -37,7 +49,7 @@ class Teacher extends Component {
 		if (this.state.contentType !== this.contentStates.QUIZ_LIST)
 		{
 			this.setState({
-				content: <QuizList />,
+				content: <QuizList quizes={this.state.quizes} />,
 				contentType: this.contentStates.QUIZ_LIST,
 			});
 		}
