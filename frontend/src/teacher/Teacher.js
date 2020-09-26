@@ -83,6 +83,7 @@ class Teacher extends Component {
 
 	viewCreateQuiz = () => {
 		this.setState({
+			editQuizName: undefined,
 			contentType: this.contentStates.CREATE_QUIZ,
 		});
 	}
@@ -92,6 +93,36 @@ class Teacher extends Component {
 		this.io.emit('start quiz', {
 			quizName,
 		});
+	}
+
+	onQuizEdit = (quizName) =>
+	{
+		this.setState({
+			editQuizName: quizName,
+			contentType: this.contentStates.CREATE_QUIZ,
+		});
+	}
+
+	onQuizSubmit = async (quiz) =>
+	{
+		quiz.created = new Date();
+		this.setState({
+			contentType: this.contentStates.QUIZ_LIST,
+		});
+		try {
+			const result = await axios.post(server_endpoint + '/teacher/createquiz', {
+				params: {
+					username: this.state.username,
+					quiz: quiz,
+				},
+			});
+			// Set quizes to updated list of quizes
+			this.setState({
+				quizzes: result.data.quizzes,
+			});
+		} catch (error) {
+			console.error(error);
+		}
 	}
 
 	render() {
@@ -107,10 +138,10 @@ class Teacher extends Component {
 					<StudentList students={this.state.students} />
 				</div>
 				<div className={this.state.contentType === this.contentStates.QUIZ_LIST ? 'show' : 'hide'}>
-					<QuizList quizzes={this.state.quizzes} onQuizStart={this.onQuizStart} />
+					<QuizList quizzes={this.state.quizzes} onQuizStart={this.onQuizStart} onQuizEdit={this.onQuizEdit} />
 				</div>
 				<div className={this.state.contentType === this.contentStates.CREATE_QUIZ ? 'show' : 'hide'}>
-					<CreateQuiz quizzes={this.state.quizzes} />
+					<CreateQuiz quizzes={this.state.quizzes} submitQuiz={this.onQuizSubmit} name={this.state.editQuizName} />
 				</div>
 			</div>
 		);
