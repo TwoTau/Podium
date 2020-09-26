@@ -110,7 +110,7 @@ class Teacher extends Component {
 					<QuizList quizzes={this.state.quizzes} onQuizStart={this.onQuizStart} />
 				</div>
 				<div className={this.state.contentType === this.contentStates.CREATE_QUIZ ? 'show' : 'hide'}>
-					<CreateQuiz />
+					<CreateQuiz quizzes={this.state.quizzes} />
 				</div>
 			</div>
 		);
