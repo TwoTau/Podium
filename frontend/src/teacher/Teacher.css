@@ -23,6 +23,30 @@
 	font-size: 32px;
 }
 
+.prompt {
+    font-size: 32px;
+}
+
+.answer-display {
+    padding: 64px;
+	margin: 64px;
+	background: #ddd;
+	font-size: 32px;
+}
+
+.left-side {
+    width: 80%;
+    float: left;
+}
+
+.right-side {
+    margin-left: 80%;
+}
+
+.student-answers-container {
+    font-size: 12px;
+}
+
 .quiz-create button:hover {
 	background: #ccc;
 }

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import StudentList from './StudentList';
 import CreateQuiz from './CreateQuiz';
 import QuizList from './QuizList';
+import QuizView from './TeacherQuizView';
 import axios from 'axios';
 import { server_endpoint, socket_endpoint } from '../config.json';
 import './Teacher.css';
@@ -94,6 +95,18 @@ class Teacher extends Component {
 		});
 	}
 
+	getUnanswered = () => {
+		// TODO: return the list of students that have not answered yet
+	}
+
+	getAnswered = () => {
+		// TODO: return the list of students that have answered
+	}
+
+	getAnswers = () => {
+		// TODO: return the list of submitted answers to be displayed
+	}
+
 	render() {
 		return (
 			<div className="teacher">
@@ -111,6 +124,9 @@ class Teacher extends Component {
 				</div>
 				<div className={this.state.contentType === this.contentStates.CREATE_QUIZ ? 'show' : 'hide'}>
 					<CreateQuiz quizzes={this.state.quizzes} />
+				</div>
+				<div className='show'>
+					<QuizView unanswered={this.getUnanswered() || []} answered={this.getAnswered() || []} answers={this.getAnswers() || []}></QuizView>
 				</div>
 			</div>
 		);
