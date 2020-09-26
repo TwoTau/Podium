@@ -10,9 +10,13 @@ class QuizChoiceButton extends Component {
 		super(props);
 	}
 
+	onClick = () => {
+		this.props.onClick(this.props.value);
+	}
+
 	render() {
 		return (
-			<button className="quiz-choice-button" onClick={this.props.onClick}>
+			<button className="quiz-choice-button" onClick={this.onClick}>
 				{this.props.value}
 			</button>
 		);
