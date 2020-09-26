@@ -63,7 +63,8 @@
 				},
 				{
 					"prompt": "What is the determinant of [[1, 2], [3, 4]]?",
-					"type": "short-answer"
+					"type": "short-answer",
+					"placeholder": "Determinant"
 				}
 			]
 		},
@@ -73,7 +74,8 @@
 			"questions": [
 				{
 					"prompt": "What is the capital of Canada",
-					"type": "short-answer"
+					"type": "short-answer",
+					"placeholder": "City name"
 				},
 				{
 					"prompt": "How many Great Lakes are there?",

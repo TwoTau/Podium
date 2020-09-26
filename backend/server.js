@@ -75,9 +75,27 @@ app.post('/teacher/createquiz', (req, res) => {
 });
 
 const studentSockets = [];
+let teacherSocket = null;
 
 io.on('connection', (socket) => {
 	console.log('New client connected');
+
+	socket.on('new teacher', (data) => {
+		handleTeacher(socket, data.username);
+	});
+
+	socket.on('new student', (data) => {
+		handleStudent(socket, data.username);
+	});
+});
+
+function handleTeacher(socket, username) {
+	teacherSocket = socket;
+
+	socket.on('disconnect', () => {
+		teacherSocket = null;
+		console.log(`Teacher with username ${username} disconnected.`);
+	});
 
 	socket.on('start quiz', (data) => {
 		// assume quizName is a valid quiz name
@@ -92,20 +110,10 @@ io.on('connection', (socket) => {
 			return;
 		}
 
-		// io.emit() // TODO
-	});
+		console.log(`Starting quiz "${quizName}"`);
 
-	socket.on('new teacher', (data) => {
-		handleTeacher(socket, data.username);
+		startQuiz(quiz);
 	});
-
-	socket.on('new student', (data) => {
-		handleStudent(socket, data.username);
-	});
-});
-
-function handleTeacher(socket, username) {
-	// TODO
 }
 
 function handleStudent(socket, username) {
@@ -124,6 +132,13 @@ function handleStudent(socket, username) {
 	socket.on('answer submission', (data) => {
 		console.log(`${username} answered "${data.answer}"`);
 	});
+}
+
+function startQuiz(quizData) {
+	let questions = quizData.questions;
+	let currQuestionIndex = 0;
+
+	io.emit('new question', questions[currQuestionIndex]);
 }
 
 http.listen(PORT, () => {

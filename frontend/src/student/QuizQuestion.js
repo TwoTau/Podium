@@ -16,7 +16,7 @@ class QuizQuestion extends Component {
 			));
 		} else if (type === 'short-answer') {
 			// TODO
-			return <QuizShortAnswer placeholder="no-placeholder" onClick={this.onAnswerSelected}></QuizShortAnswer>;
+			return <QuizShortAnswer placeholder={this.props.placeholder} onClick={this.onAnswerSelected}></QuizShortAnswer>;
 		} else if (type === 'draw') {
 			// TODO
 			return null;

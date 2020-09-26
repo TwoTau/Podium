@@ -3,8 +3,9 @@ import StudentList from './StudentList';
 import CreateQuiz from './CreateQuiz';
 import QuizList from './QuizList';
 import axios from 'axios';
-import { server_endpoint } from '../config.json';
+import { server_endpoint, socket_endpoint } from '../config.json';
 import './Teacher.css';
+import io from 'socket.io-client';
 
 class Teacher extends Component {
 	contentStates = {
@@ -16,21 +17,37 @@ class Teacher extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			username: 'mrs-teacher-name', // TODO
 			contentType: this.contentStates.STUDENT_LIST,
 			quizzes: [],
 			students: [],
 		};
-		this.state.content = <StudentList students={this.state.students} />;
 
 		this.setStudentList();
 		this.setQuizzesList();
+
+		this.props.onPageSet('teacher');
+		this.props.onNameSet(this.state.username);
+
+		// Opens up a socket to the database
+		const socket = io(socket_endpoint, { autoConnect: true });
+
+		this.io = socket;
+
+		socket.on("connect", () => {
+			this.io.emit('new teacher', {
+				username: this.state.username || 'Anonymous'
+			});
+
+			console.log("Successfully connected to the database!");
+		});
 	}
 
 	async setStudentList() {
 		try {
 			const result = await axios.get(server_endpoint + '/students');
 			this.setState({
-				students: result.data.students
+				students: result.data.students,
 			});
 		} catch (error) {
 			console.error(error);
@@ -41,7 +58,7 @@ class Teacher extends Component {
 		try {
 			const result = await axios.get(server_endpoint + '/teacher/quizlist', {
 				params: {
-					username: 'mrs-teacher-name', // TODO
+					username: this.state.username,
 				},
 			});
 			this.setState({
@@ -53,41 +70,48 @@ class Teacher extends Component {
 	}
 
 	viewStudentList = () => {
-		if (this.state.contentType !== this.contentStates.STUDENT_LIST) {
-			this.setState({
-				content: <StudentList students={this.state.students} />,
-				contentType: this.contentStates.STUDENT_LIST,
-			});
-		}
+		this.setState({
+			contentType: this.contentStates.STUDENT_LIST,
+		});
 	}
 
 	viewQuizList = () => {
-		if (this.state.contentType !== this.contentStates.QUIZ_LIST) {
-			this.setState({
-				content: <QuizList quizzes={this.state.quizzes} />,
-				contentType: this.contentStates.QUIZ_LIST,
-			});
-		}
+		this.setState({
+			contentType: this.contentStates.QUIZ_LIST,
+		});
 	}
 
 	viewCreateQuiz = () => {
-		if (this.state.contentType !== this.contentStates.CREATE_QUIZ) {
-			this.setState({
-				content: <CreateQuiz />,
-				contentType: this.contentStates.CREATE_QUIZ,
-			});
-		}
+		this.setState({
+			contentType: this.contentStates.CREATE_QUIZ,
+		});
+	}
+
+	onQuizStart = (quizName) => {
+		alert(`Starting quiz ${quizName}`);
+		this.io.emit('start quiz', {
+			quizName,
+		});
 	}
 
 	render() {
 		return (
-            <div>
-                <div className="quiz-create">
-                    <button onClick={this.viewStudentList}>View Student List</button>
-                    <button onClick={this.viewQuizList}>Quiz List</button>
-                    <button onClick={this.viewCreateQuiz}>Create Quiz</button>
-                </div>
+			<div className="teacher">
+				<div className="teacher-nav">
+					<button onClick={this.viewStudentList} className={this.state.contentType === this.contentStates.STUDENT_LIST ? 'selected' : ''}>View Student List</button>
+					<button onClick={this.viewQuizList} className={this.state.contentType === this.contentStates.QUIZ_LIST ? 'selected' : ''}>Quiz List</button>
+					<button onClick={this.viewCreateQuiz} className={this.state.contentType === this.contentStates.CREATE_QUIZ ? 'selected' : ''}>Create Quiz</button>
+				</div>
 				<div>{this.state.content}</div>
+				<div className={this.state.contentType === this.contentStates.STUDENT_LIST ? 'show' : 'hide'}>
+					<StudentList students={this.state.students} />
+				</div>
+				<div className={this.state.contentType === this.contentStates.QUIZ_LIST ? 'show' : 'hide'}>
+					<QuizList quizzes={this.state.quizzes} onQuizStart={this.onQuizStart} />
+				</div>
+				<div className={this.state.contentType === this.contentStates.CREATE_QUIZ ? 'show' : 'hide'}>
+					<CreateQuiz />
+				</div>
 			</div>
 		);
 	}

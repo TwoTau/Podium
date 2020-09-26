@@ -18,7 +18,7 @@ class QuizShortAnswer extends Component {
 	render() {
 		return (
 			<div className="quiz-short-answer">
-				<input type="text" placeholder={this.props.placeholder} />
+				<input type="text" placeholder={this.props.placeholder || 'no-placeholder'} />
 				<button onClick={this.onSubmit}>Submit</button>
 			</div>
 		);
