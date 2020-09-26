@@ -1,0 +1,22 @@
+.home {
+
+}
+
+.home-button {
+	display: inline-block;
+	text-decoration: none;
+	outline: 0;
+	border: 0;
+	cursor: pointer;
+	padding: 64px;
+	margin: 64px;
+	font-size: 32px;
+	width: 500px;
+	color: inherit;
+	background: #ddd;
+	transition: 0.2s;
+}
+
+.home-button:hover {
+	background: #bbb;
+}
