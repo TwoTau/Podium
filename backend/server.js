@@ -74,17 +74,57 @@ app.post('/teacher/createquiz', (req, res) => {
 	res.send({});
 });
 
-const connectedStudents = [];
+const studentSockets = [];
 
 io.on('connection', (socket) => {
 	console.log('New client connected');
 
-	socket.on('new student', (name) => {
-		socket.userId = name;
-		connectedStudents.add(data);
-		io.emit('new student', [...activeUsers]);
+	socket.on('start quiz', (data) => {
+		// assume quizName is a valid quiz name
+		let quizName = data.quizName;
+		const quiz = db
+			.get('quizzes')
+			.find({ name: quizName })
+			.value();
+
+		if (!quiz) {
+			console.error(`No quiz with name "${quizName}" found`);
+			return;
+		}
+
+		// io.emit() // TODO
+	});
+
+	socket.on('new teacher', (data) => {
+		handleTeacher(socket, data.username);
+	});
+
+	socket.on('new student', (data) => {
+		handleStudent(socket, data.username);
 	});
 });
+
+function handleTeacher(socket, username) {
+	// TODO
+}
+
+function handleStudent(socket, username) {
+	socket.username = username;
+	studentSockets.push(socket);
+	console.log(`New student with username "${username}" connected. Current users: ${studentSockets.length}`);
+
+	socket.on('disconnect', () => {
+		const index = studentSockets.indexOf(socket);
+		if (index > -1) {
+			studentSockets.splice(index, 1);
+		}
+		console.log(`Client with username ${username} disconnected. Current users: ${studentSockets.length}`);
+	});
+
+	socket.on('answer submission', (data) => {
+		console.log(`${username} answered "${data.answer}"`);
+	});
+}
 
 http.listen(PORT, () => {
 	console.log(`Server listening on http://localhost:${PORT}`);
