@@ -77,6 +77,14 @@ app.post('/teacher/createquiz', (req, res) => {
 const studentSockets = [];
 let teacherSocket = null;
 
+// maps classroom name to studentSockets list and teacherSocket
+const classroom = {
+	"some-name": {
+		studentSockets: [],
+		teacherSocket: null
+	}
+};
+
 io.on('connection', (socket) => {
 	console.log('New client connected');
 

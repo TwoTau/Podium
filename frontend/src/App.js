@@ -12,12 +12,29 @@ class App extends Component {
 		};
 	}
 
+	updateTitle = () => {
+		let newTitle = 'Pollodium | ';
+		if (this.state.page === 'student') {
+			newTitle += this.state.name;
+		} else {
+			const uppercase = this.state.page[0].toUpperCase() + this.state.page.slice(1);
+			newTitle += uppercase;
+		}
+		document.getElementsByTagName('title')[0].text = newTitle;
+	}
+
 	onNameSet = (name) => {
-		this.setState({ name });
+		this.setState({ name }, () => {
+			if (this.state.page === 'student') {
+				this.updateTitle();
+			}
+		});
 	}
 
 	onPageSet = (page) => {
-		this.setState({ page });
+		this.setState({ page }, () => {
+			this.updateTitle();
+		});
 
 		if (page === 'Home') {
 			this.setState({ name: null });
