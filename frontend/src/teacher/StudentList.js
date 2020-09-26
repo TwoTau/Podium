@@ -5,9 +5,13 @@ class StudentList extends Component {
         super(props);
     }
 
+    shouldComponentUpdate(nextProps, nextState){
+        return true;
+    }
+
     render() {
         return (
-            <div>
+            <div className="information-text">
                 <h1>StudentList</h1>
                 <ul>
                     {this.props.students.map((student) =>

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class QuizListItem extends Component {
     render() {
         return (
-            <div>
+            <div className="information-text">
                 <h1>QuizListItem</h1>
                 <div>
                     <h1>{this.props.name}</h1>

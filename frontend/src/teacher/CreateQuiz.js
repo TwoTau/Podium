@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class CreateQuiz extends Component {
     render() {
         return (
-            <div>
+            <div className="information-text">
                 <h1>CreateQuiz</h1>
             </div>
         );

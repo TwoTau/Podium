@@ -4,6 +4,7 @@ import CreateQuiz from './CreateQuiz';
 import QuizList from './QuizList';
 import axios from 'axios';
 import { server_endpoint } from '../config.json';
+import './Teacher.css';
 
 class Teacher extends Component {
 	contentStates = {
@@ -80,12 +81,12 @@ class Teacher extends Component {
 
 	render() {
 		return (
-			<div className="teacher">
-				<div className="teacher-nav">
-					<button onClick={this.viewStudentList}>View Student List</button>
-					<button onClick={this.viewQuizList}>Quiz List</button>
-					<button onClick={this.viewCreateQuiz}>Create Quiz</button>
-				</div>
+            <div>
+                <div className="quiz-create">
+                    <button onClick={this.viewStudentList}>View Student List</button>
+                    <button onClick={this.viewQuizList}>Quiz List</button>
+                    <button onClick={this.viewCreateQuiz}>Create Quiz</button>
+                </div>
 				<div>{this.state.content}</div>
 			</div>
 		);
