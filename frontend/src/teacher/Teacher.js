@@ -3,6 +3,7 @@ import StudentList from './StudentList';
 import CreateInstaQuiz from './CreateInstaQuiz';
 import CreateQuiz from './CreateQuiz';
 import QuizList from './QuizList';
+import "./Teacher.css";
 
 class Teacher extends Component {
     contentStates = {
@@ -80,7 +81,7 @@ class Teacher extends Component {
 	render() {
 		return (
             <div>
-                <div>
+                <div className="quiz-create">
                     <button onClick={this.viewStudentList}>View Student List</button>
                     <button onClick={this.viewQuizList}>Quiz List</button>
                     <button onClick={this.viewCreateQuiz}>Create Quiz</button>

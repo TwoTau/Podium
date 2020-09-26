@@ -5,7 +5,7 @@ class CreateInstaQuiz extends Component
     render()
     {
         return (
-            <div>
+            <div className="information-text">
                 <h1>CreateInstaQuiz</h1>
             </div>
         );

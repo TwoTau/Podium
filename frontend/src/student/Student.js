@@ -12,12 +12,16 @@ class Student extends Component {
 
 		this.io = socket;
 
+		// For testing purposes. Delete later.
+		this.state = { name: 'sirknightj' }
+
 		socket.on("connect", () => {
+			this.io.send({ name: this.state.name || 'Anonymous' })
 			console.log("Successfully connected to the database!");
 		});
 
 		socket.on("new-question", (questionData) => {
-			this.setState({name: this.state.name || 'Anonymous', ...questionData});
+			this.setState({ name: this.state.name || 'Anonymous', ...questionData });
 		})
 
 		socket.on("disconnect", (reason) => {
@@ -34,7 +38,7 @@ class Student extends Component {
 
 	submit = (answer) => {
 		return this.io.send({
-			student: this.state.name || 'Anonymous',
+			name: this.state.name || 'Anonymous',
 			prompt: this.state.prompt || 'No prompt',
 			answer: answer,
 		});
