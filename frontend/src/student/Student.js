@@ -21,13 +21,15 @@ class Student extends Component {
 		};
 
 		socket.on("connect", () => {
-			this.io.send({ name: this.state.name || 'Anonymous' })
+			this.io.emit('new student', {
+				username: this.state.name || 'Anonymous'
+			});
 			console.log("Successfully connected to the database!");
 		});
 
 		socket.on("new-question", (questionData) => {
 			this.setState({ name: this.state.name || 'Anonymous', ...questionData });
-		})
+		});
 
 		socket.on("disconnect", (reason) => {
 			alert('Your connection to the server has been lost.')
@@ -38,7 +40,7 @@ class Student extends Component {
 
 	submit = (answer) => {
 		console.log(this.state) // TODO: Delete this line later.
-		return this.io.send({ ...this.state, answer: answer, });
+		return this.io.emit('answer submission', { ...this.state, answer: answer, });
 	};
 
 	render() {
