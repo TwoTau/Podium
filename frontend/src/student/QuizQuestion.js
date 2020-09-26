@@ -27,6 +27,7 @@ class QuizQuestion extends Component {
 
 	onAnswerSelected = (answerChoice) => {
 		alert(`Student selected "${answerChoice}"`);
+		this.props.handleSubmit(answerChoice);
 	}
 
 	render() {
