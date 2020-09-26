@@ -1,4 +1,58 @@
+.student {
+	padding: 64px;
+}
+
+.quiz-question {
+	background: #eee;
+	margin-bottom: 64px;
+}
+
+.prompt {
+	background: #ddd;
+	padding: 64px;
+}
+
+.prompt h2 {
+	font-size: 48px;
+}
+
 .quiz-choice-button {
+	padding: 64px;
+	margin: 64px;
+	border: 0;
+	outline: 0;
+	cursor: pointer;
+	background: #ddd;
+	font-size: 32px;
+	transition: 0.2s;
+	width: calc(50% - 128px);
+}
+
+.quiz-choice-button:hover {
+	background: #ccc;
+}
+
+.quiz-short-answer {
+	padding: 64px;
+}
+
+.quiz-short-answer input {
 	padding: 32px;
-	margin: 32px;
+	font-size: 32px;
+	border: 0;
+	outline: 0;
+	width: 50%;
+}
+
+.quiz-short-answer button {
+	padding: 32px;
+	border: 0;
+	outline: 0;
+	font-size: 32px;
+	cursor: pointer;
+	background: #ddd;
+	transition: 0.2s;
+}
+.quiz-short-answer button:hover {
+	background: #ccc;
 }
