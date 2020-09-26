@@ -1,76 +1,88 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
+
+const low = require('lowdb');
+const FileSync = require('lowdb/adapters/FileSync');
+const db = low(new FileSync('db.json'));
+
+// initialize with default data if db is empty
+db.defaults(require('./default-data.json')).write();
+
 const PORT = process.env.PORT || 8000;
+
+app.use(cors({
+	origin: 'http://localhost:3000'
+}));
 
 app.get('/', (req, res) => {
 	console.log('Got request to /');
 	res.send('Hello world');
 });
 
-app.get('/teacher/quizlist', (req, res) =>
-{
-	console.log(req.query);
-	if (req.query.id) {
-		console.log('Got request for quiz list for ' + req.query.id);
-		res.status(200);
-		res.send({
-			data: [  // Temp data, use db in future
-				{
-					name: 'quiz1',
-					id: 'quiz1id',
-					date: new Date(),
-				},
-				{
-					name: 'quiz2',
-					id: 'quiz2id',
-					date: new Date(),
-				}
-			]
-		});
-	}
-	else
-	{
+app.get('/students', (req, res) => {
+	console.log('Got request for all students');
+
+	const students = db
+		.get('students')
+		.value();
+
+	res.send({
+		students,
+	});
+});
+
+app.get('/teacher/quizlist', (req, res) => {
+	if (!req.query.username) {
 		console.log('Got bad request for quiz list');
-		res.status(400);
-		res.send({
-			data: []
-		})
+		res.status(400).send('Missing username param');
+		return;
 	}
+
+	console.log('Got request for quiz list for ' + req.query.username);
+
+	const teacher = db
+		.get('teachers')
+		.find({ username: req.query.username })
+		.value();
+
+	if (!teacher) {
+		console.log(`Teacher ${req.query.username} does not exist`);
+		res.status(400).send('Teacher does not exist');
+		return;
+	}
+
+	const quizzes = db
+		.get('quizzes')
+		.filter((q) => teacher.quizzes.includes(q.name))
+		.map((q) => ({
+			name: q.name,
+			created: q.created
+		}))
+		.value();
+
+	res.send({
+		quizzes,
+	});
 });
 
-app.post('/teacher/createquiz', (req, res) =>
-{
-	console.log(req.body);
+app.post('/teacher/createquiz', (req, res) => {
+	// TODO
 	console.log('Got request for create quiz for ');
-	res.status(200);
-	res.send({
-	});
+	res.send({});
 });
 
-app.post('/teacher/createinstaquiz', (req, res) =>
-{
-	console.log('Got request for create instaQuiz for ');
-	res.status(200);
-	res.send({
-	});
-});
+const connectedStudents = [];
 
-app.get('/student/joinquiz', (req, res) =>
-{ 
-	console.log('Got request to join for ');
-	res.status(200);
-	res.send({
-	})
-})
-
-// Realtime message sending socket part
 io.on('connection', (socket) => {
 	console.log('New client connected');
-	// On getting drawing from request emit it to all users
-	socket.on('drawing', (dwg) => {
-		io.emit('drawing', dwg);
+
+	socket.on('new student', (name) => {
+		socket.userId = name;
+		connectedStudents.add(data);
+		io.emit('new student', [...activeUsers]);
 	});
 });
 

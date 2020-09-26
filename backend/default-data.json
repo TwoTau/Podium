@@ -1,0 +1,96 @@
+{
+	"students": [
+		{
+			"username": "sirknightj",
+			"score": 31
+		},
+		{
+			"username": "lordbyronj",
+			"score": 41
+		},
+		{
+			"username": "royliurl",
+			"score": 59
+		},
+		{
+			"username": "twotau",
+			"score": 26
+		}
+	],
+	"teachers": [
+		{
+			"username": "mrs-teacher-name",
+			"quizzes": [
+				"easy math quiz",
+				"geography quiz"
+			]
+		}
+	],
+	"quizzes": [
+		{
+			"name": "easy math quiz",
+			"created": "2020-09-25",
+			"questions": [
+				{
+					"prompt": "What is 1+1?",
+					"type": "multiple-choice",
+					"answers": [
+						"1",
+						"2",
+						"3",
+						"4"
+					]
+				},
+				{
+					"prompt": "Is 0 always an eigenvalue of a singular matrix?",
+					"type": "multiple-choice",
+					"answers": [
+						"Yes",
+						"No"
+					]
+				},
+				{
+					"prompt": "Can you multiply a 3x4 matrix with a 4x2 matrix?",
+					"type": "multiple-choice",
+					"answers": [
+						"Yes",
+						"No"
+					]
+				},
+				{
+					"prompt": "Draw a happy 3x4 matrix",
+					"type": "draw"
+				},
+				{
+					"prompt": "What is the determinant of [[1, 2], [3, 4]]?",
+					"type": "short-answer"
+				}
+			]
+		},
+		{
+			"name": "geography quiz",
+			"created": "2020-09-26",
+			"questions": [
+				{
+					"prompt": "What is the capital of Canada",
+					"type": "short-answer"
+				},
+				{
+					"prompt": "How many Great Lakes are there?",
+					"type": "multiple-choice",
+					"answers": [
+						"5",
+						"1",
+						"2",
+						"3",
+						"4"
+					]
+				},
+				{
+					"prompt": "Draw the Canadian flag",
+					"type": "draw"
+				}
+			]
+		}
+	]
+}

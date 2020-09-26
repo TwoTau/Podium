@@ -1,93 +1,93 @@
 import React, { Component } from "react";
 import StudentList from './StudentList';
-import CreateInstaQuiz from './CreateInstaQuiz';
 import CreateQuiz from './CreateQuiz';
 import QuizList from './QuizList';
+import axios from 'axios';
+import { server_endpoint } from '../config.json';
 
 class Teacher extends Component {
-    contentStates = {
+	contentStates = {
 		STUDENT_LIST: 'StudentList',
 		QUIZ_LIST: 'QuizList',
 		CREATE_QUIZ: 'CreateQuiz',
-		INSTA_QUIZ: 'InstaQuiz',
-    }
-
-    constructor(props)
-    { 
-        super(props);
-        this.state = {
-			content: <StudentList />,
-			contentType: this.contentStates.STUDENT_LIST,
-			quizes: [  // Temp data, use api in future
-				{
-					name: 'quiz1',
-					id: 'quiz1id',
-					date: new Date(),
-				},
-				{
-					name: 'quiz2',
-					id: 'quiz2id',
-					date: new Date(),
-				},
-			],
-		};
 	}
-	
-	viewStudentList = () =>
-	{ 
-		if (this.state.contentType !== this.contentStates.STUDENT_LIST)
-		{
+
+	constructor(props) {
+		super(props);
+		this.state = {
+			contentType: this.contentStates.STUDENT_LIST,
+			quizzes: [],
+			students: [],
+		};
+		this.state.content = <StudentList students={this.state.students} />;
+
+		this.setStudentList();
+		this.setQuizzesList();
+	}
+
+	async setStudentList() {
+		try {
+			const result = await axios.get(server_endpoint + '/students');
 			this.setState({
-				content: <StudentList />,
+				students: result.data.students
+			});
+		} catch (error) {
+			console.error(error);
+		}
+	}
+
+	async setQuizzesList() {
+		try {
+			const result = await axios.get(server_endpoint + '/teacher/quizlist', {
+				params: {
+					username: 'mrs-teacher-name', // TODO
+				},
+			});
+			this.setState({
+				quizzes: result.data.quizzes,
+			});
+		} catch (error) {
+			console.error(error);
+		}
+	}
+
+	viewStudentList = () => {
+		if (this.state.contentType !== this.contentStates.STUDENT_LIST) {
+			this.setState({
+				content: <StudentList students={this.state.students} />,
 				contentType: this.contentStates.STUDENT_LIST,
 			});
 		}
 	}
-	
-	viewQuizList = () =>
-	{ 
-		if (this.state.contentType !== this.contentStates.QUIZ_LIST)
-		{
+
+	viewQuizList = () => {
+		if (this.state.contentType !== this.contentStates.QUIZ_LIST) {
 			this.setState({
-				content: <QuizList quizes={this.state.quizes} />,
+				content: <QuizList quizzes={this.state.quizzes} />,
 				contentType: this.contentStates.QUIZ_LIST,
 			});
 		}
 	}
-	
-	viewCreateQuiz = () =>
-	{ 
-		if (this.state.contentType !== this.contentStates.CREATE_QUIZ)
-		{
+
+	viewCreateQuiz = () => {
+		if (this.state.contentType !== this.contentStates.CREATE_QUIZ) {
 			this.setState({
 				content: <CreateQuiz />,
 				contentType: this.contentStates.CREATE_QUIZ,
 			});
 		}
 	}
-	
-	viewInstaQuiz = () =>
-	{ 
-		if (this.state.contentType !== this.contentStates.INSTA_QUIZ)
-		{
-			this.setState({
-				content: <CreateInstaQuiz />,
-				contentType: this.contentStates.INSTA_QUIZ,
-			});
-		}
-	}
 
 	render() {
 		return (
-            <div>
-                <div>
-                    <button onClick={this.viewStudentList}>View Student List</button>
-                    <button onClick={this.viewQuizList}>Quiz List</button>
-                    <button onClick={this.viewCreateQuiz}>Create Quiz</button>
-                    <button onClick={this.viewInstaQuiz}>Poll Singe Quiz Question</button>
-                </div>
+			<div className="teacher">
+				<div className="teacher-nav">
+					<button onClick={this.viewStudentList}>View Student List</button>
+					<button onClick={this.viewQuizList}>Quiz List</button>
+					<button onClick={this.viewCreateQuiz}>Create Quiz</button>
+				</div>
 				<div>{this.state.content}</div>
-            </div>
+			</div>
 		);
 	}
 }

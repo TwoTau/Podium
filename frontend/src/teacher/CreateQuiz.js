@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 
-class CreateQuiz extends Component
-{
-    render()
-    {
+class CreateQuiz extends Component {
+    render() {
         return (
             <div>
                 <h1>CreateQuiz</h1>

@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import QuizListItem from './QuizListItem';
 
-class QuizList extends Component
-{
-    render()
-    {
+class QuizList extends Component {
+    render() {
         return (
             <div>
                 <h1>QuizList</h1>
-                {this.props.quizes && this.props.quizes.map((curr) =>
-                {
-                    return <QuizListItem key={curr.id} name={curr.name} id={curr.id} date={curr.date} />;
+                {this.props.quizzes && this.props.quizzes.map((curr) => {
+                    return <QuizListItem key={curr.name} name={curr.name} date={curr.created} />;
                 })}
             </div>
         );

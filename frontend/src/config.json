@@ -1,3 +1,4 @@
 {
-	"socket_endpoint": "http://localhost:8000"
+	"socket_endpoint": "http://localhost:8000",
+	"server_endpoint": "http://localhost:8000"
 }
