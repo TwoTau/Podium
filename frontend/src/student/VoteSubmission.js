@@ -14,7 +14,7 @@ class VoteSubmission extends Component {
     }
 
     onVote = (event) => {
-        const answer = document.querySelector("#" + this.props.student).value;
+        const answer = this.slider.value;
         this.props.onVote(this.props.student, answer);
     }
 
@@ -34,7 +34,7 @@ class VoteSubmission extends Component {
                 </div>
                 <div className="vote-label">
                     <label>👎</label>
-                    <input type="range" min="-1" max="1" id={this.props.student} onChange={this.onVote} />
+                    <input ref={slider => this.slider = slider} type="range" min="-1" max="1" onChange={this.props.onVote} />
                     <label>👍</label>
                 </div>
             </div>

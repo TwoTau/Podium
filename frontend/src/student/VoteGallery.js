@@ -19,7 +19,7 @@ class VoteGallery extends Component {
                 <h1>{`Q: ${this.props.prompt}`}</h1>
                 <div className={"vote-gallery"}>
                     {this.props.answers.map(s => (
-                        <VoteSubmission type={this.props.type} key={s.student} student={s.student} answer={s.answer} onChange={this.props.onVote} />
+                        <VoteSubmission type={this.props.type} key={s.student} student={s.student} answer={s.answer} onVote={this.props.onVote} />
                     ))}
                 </div>
             </div>
