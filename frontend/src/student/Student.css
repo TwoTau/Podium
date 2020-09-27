@@ -122,12 +122,14 @@
 	padding: 32px;
 	margin-bottom: 32px;
 	background: #ddd;
+	max-width: 700px;
 }
 
 .participant {
 	background: #eee;
-	margin: 16px;
+	margin: 32px 0;
 	display: flex;
 	justify-content: space-between;
-	padding: 16px;
+	padding: 32px;
+	border-radius: 4px;
 }
