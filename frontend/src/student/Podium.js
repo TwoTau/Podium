@@ -13,6 +13,7 @@ class Podium extends Component {
     render() {
         return (
             <div className="podium">
+                <h2 className="podium-title">Podium</h2>
                 {this.props.students.sort((a, b) => b.score - a.score).map((s, i) => (
                     <Participant key={s.username} name={s.username} score={s.score} rank={i + 1}/>
                 ))}
