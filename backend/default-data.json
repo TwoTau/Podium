@@ -22,7 +22,9 @@
 			"username": "mrs-teacher-name",
 			"quizzes": [
 				"easy math quiz",
-				"geography quiz"
+				"geography quiz",
+				"biology quiz",
+				"financial literacy quiz"
 			]
 		}
 	],

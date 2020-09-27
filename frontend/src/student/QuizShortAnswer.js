@@ -10,7 +10,7 @@ class QuizShortAnswer extends Component {
 		super(props);
 
 		this.state = {
-			hasSubmitted: false,
+			hasSubmitted: this.props.state,
 		}
 	}
 
