@@ -72,9 +72,35 @@ app.get('/teacher/quizlist', (req, res) => {
 });
 
 app.post('/teacher/createquiz', (req, res) => {
-	// TODO
-	console.log('Got request for create quiz for ');
-	res.send({});
+	console.log(req.query);
+	console.log(req.body);
+	console.log(req.params);
+	console.log(req.headers);
+	if (!req.body.username) {
+		console.log('Got bad request for create quiz');
+		res.status(400).send('Missing username param');
+		return;
+	}
+
+	console.log('Got request for create quiz');
+	const testCreateQuiz = db
+		.get('quizzes')
+		.push(req.body.quiz)
+		.write();
+
+	const quizzes = db
+		.get('quizzes')
+		.filter((q) => teacher.quizzes.includes(q.name))
+		.map((q) => ({
+			name: q.name,
+			created: q.created
+		}))
+		.value();
+	console.log(quizzes);
+
+	res.send({
+		quizzes,
+	});
 });
 
 // maps teacher name to Classroom
