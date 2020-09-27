@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from './Header';
 import Main from './Main';
 import './App.css';
+import QuizQuestion from './student/QuizQuestion';
 
 class App extends Component {
 	constructor(props) {
@@ -48,7 +49,7 @@ class App extends Component {
 			isConnected,
 		}, this.updateTitle);
 		console.log(`isConnected = ${isConnected}`);
-	}
+  }
 
 	render() {
 		return (
