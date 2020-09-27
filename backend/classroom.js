@@ -126,6 +126,8 @@ class Classroom {
 			answer.votes = 0;
 		}
 
+		console.log("Ended submissions");
+
 		this.sendAll('submission end', {
 			answers: this.answers
 		});

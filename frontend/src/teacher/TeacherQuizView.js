@@ -10,47 +10,60 @@ import React, { Component } from 'react';
 class TeacherQuizView extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            allowingSubmissions: true,
+        };
+
+
     }
 
     getAnswers = () => {
         return this.props.answers.map(answer => (
             <p>answer</p>
-        ))
+        ));
     }
 
     getUnanswered = () => {
         return this.props.unanswered.map(student => (
             <p>{student.username || 'Anonymous'}</p>
-        ))
+        ));
     }
 
     getAnswered = () => {
         return this.props.answered.map(student => (
             <p>{student.username || 'Anonymous'}</p>
-        ))
+        ));
+    }
+
+    handleEndSubmissions = () => {
+        this.setState({
+            allowingSubmissions: false,
+        });
+        this.props.onEndSubmission();
     }
 
     handleNextQuestion = () => {
+        this.setState({
+            allowingSubmissions: true,
+        });
         this.props.onNextQuestion();
     }
 
     render() {
-        let prompt = "Click 'Next' to start the quiz";
-		if (this.props.prompt) {
-			prompt = `Q: ${this.props.prompt}`;
-		}
         return (
-            <div>
+            <div className="teacher-quiz-view">
                 <div className="left-side">
                     <div className="quiz-question">
                         <div className="prompt">
-                            <h2>{prompt}</h2>
+                            <h2>Q: {this.props.prompt}</h2>
                         </div>
                         <div className="student-answers-container">
                             {this.getAnswers()}
                         </div>
-                        <div>
-                            <button onClick={this.handleNextQuestion}>Next</button>
+                        <div className={"teacher-quiz-view-control-buttons " + (this.state.allowingSubmissions ? "submission-period" : "voting-period")}>
+                            <button onClick={this.handleEndSubmissions}>End Submissions</button>
+                            <button onClick={this.handleNextQuestion}>Next Question</button>
                         </div>
                     </div>
                 </div>

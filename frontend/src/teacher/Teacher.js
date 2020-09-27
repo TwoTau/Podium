@@ -121,6 +121,7 @@ class Teacher extends Component {
 		this.io.emit('start quiz', {
 			quizName,
 		});
+		this.onNextQuestion(); // start first question immediately
 
 		this.setState({
 			contentType: this.contentStates.QUIZ_IN_SESSION,
@@ -146,7 +147,7 @@ class Teacher extends Component {
 					quiz: quiz,
 				},
 			});
-			// Set quizes to updated list of quizes
+			// Set quizzes to updated list of quizes
 			this.setState({
 				quizzes: result.data.quizzes,
 			});
