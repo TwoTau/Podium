@@ -71,6 +71,49 @@
 					"type": "draw"
 				}
 			]
+		},
+		{
+			"name": "biology quiz",
+			"created": "2020-09-26",
+			"questions": [
+				{
+					"prompt": "Draw the four phases of mitosis.",
+					"type": "draw"
+				},
+				{
+					"prompt": "Describe the importance of compartmentalization in eukaryotic cells.",
+					"type": "short-answer",
+					"placeholder": "describe"
+				},
+				{
+					"prompt": "Draw a punnet square for a cross between two heterozygotes.",
+					"type": "draw"
+				},
+				{
+					"prompt": "Draw and label a fluid mosaic model of a cell membrane.",
+					"type": "draw"
+				}
+			]
+		},
+		{
+			"name": "biology quiz",
+			"created": "2020-09-26",
+			"questions": [
+				{
+					"prompt": "Outline the benefits of automating ones finances.",
+					"type": "short-answer",
+					"placeholder": "outline"
+				},
+				{
+					"prompt": "Describe the importance of a good credit score.",
+					"type": "short-answer",
+					"placeholder": "describe"
+				},
+				{
+					"prompt": "Draw a diagram to show the benefits of networking.",
+					"type": "draw"
+				},
+			]
 		}
 	]
 }
