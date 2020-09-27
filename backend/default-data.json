@@ -62,7 +62,7 @@
 					"placeholder": "describe"
 				},
 				{
-					"prompt": "Draw a punnet square for a cross between two heterozygotes.",
+					"prompt": "Draw a Punnett square for a cross between two heterozygotes.",
 					"type": "draw"
 				},
 				{
