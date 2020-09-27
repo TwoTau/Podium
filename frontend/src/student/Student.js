@@ -46,10 +46,13 @@ class Student extends Component {
 			console.log(`Your connection to the server has been lost: ${reason}`);
 			socket.open();
 		});
+
+		socket.on("quiz end", () => {
+
+		})
 	}
 
 	submit = (answer) => {
-		console.log(this.state) // TODO: Delete this line later.
 		return this.io.emit('answer submission', {
 			answer,
 			username: this.state.username || 'Anonymous',
@@ -59,7 +62,9 @@ class Student extends Component {
 	render() {
 		return (
 			<div className="student">
-				<QuizQuestion prompt={this.state.prompt} answers={this.state.answers} type={this.state.type} placeholder={this.state.placeholder} handleSubmit={this.submit}></QuizQuestion>
+				<div>
+					<QuizQuestion prompt={this.state.prompt} answers={this.state.answers} type={this.state.type} placeholder={this.state.placeholder} handleSubmit={this.submit}></QuizQuestion>
+				</div>
 			</div>
 		);
 	}

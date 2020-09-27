@@ -12,6 +12,10 @@
 	padding: 64px;
 }
 
+.student>.hide {
+	display: none;
+}
+
 .prompt h2 {
 	font-size: 48px;
 }
