@@ -75,12 +75,23 @@
 }
 
 .left-side {
-	width: 80%;
+	width: 70%;
 	float: left;
 }
 
 .right-side {
-	margin-left: 80%;
+	margin-left: 75%;
+	width: 25%;
+	background: #fff;
+	padding: 64px;
+}
+
+.unanswered-students p, .answered-students p {
+	font-size: 24px;
+	margin-top: 16px;
+}
+.answered-students {
+	margin-bottom: 64px;
 }
 
 .teacher .vote-gallery-container {

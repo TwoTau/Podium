@@ -70,13 +70,13 @@ class TeacherQuizView extends Component {
                     </div>
                 </div>
                 <div className="right-side">
-                    <h1>{`Unanswered (${this.props.unanswered.length || 0})`}</h1>
-                    <div>
-                        {this.getUnanswered()}
-                    </div>
-                    <h1>{`Answered (${this.props.answered.length || 0})`}</h1>
-                    <div>
+                    <h1>{this.props.answered.length || 0} Answered</h1>
+                    <div className="answered-students">
                         {this.getAnswered()}
+                    </div>
+                    <h1>{this.props.unanswered.length || 0} Unanswered</h1>
+                    <div className="unanswered-students">
+                        {this.getUnanswered()}
                     </div>
                 </div>
             </div>

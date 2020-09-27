@@ -15,7 +15,7 @@ class VoteGallery extends Component {
 
     render() {
         return (
-            <div className="vote-gallery-container">
+            <div className={"vote-gallery-container " + (this.props.answers.length ? 'show' : 'hide')}>
                 <div className="prompt">
                     <h2><span className="vote-heading">VOTE</span> {this.props.prompt}</h2>
                 </div>

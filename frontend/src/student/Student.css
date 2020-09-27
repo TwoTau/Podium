@@ -41,7 +41,10 @@
 
 .vote-submission {
 	background: #eee;
-	/* padding: 64px; */
+	margin-top: 64px;
+}
+.vote-submission:first-child {
+	margin-top: 0;
 }
 
 .answer-box {
