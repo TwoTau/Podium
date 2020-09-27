@@ -25,3 +25,22 @@
 .is-connected.disconnected::before {
 	content: "❌ ";
 }
+
+.disconnected-banner.hide {
+	display: none;
+}
+
+.disconnected-banner {
+	position: fixed;
+	width: 120vw;
+	left: 0;
+	right: 0;
+	padding: 20vh;
+	font-size: 80px;
+	text-align: center;
+	transform-origin: 50vw 50vh;
+	transform: rotate(-20deg) translate(-200px, 100px);
+	pointer-events: none;
+	background: rgba(226,27,60, 0.7);
+	color: white;	
+}

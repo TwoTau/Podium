@@ -11,10 +11,11 @@ import CanvasDraw from "react-canvas-draw";
 class VoteSubmission extends Component {
     constructor(props) {
         super(props);
+        this.sliderRef = React.createRef();
     }
 
     onVote = (event) => {
-        const answer = this.slider.value;
+        const answer = +this.sliderRef.current.value;
         this.props.onVote(this.props.student, answer);
     }
 
@@ -22,7 +23,7 @@ class VoteSubmission extends Component {
         if (this.props.type === 'draw') {
             return (<CanvasDraw disabled hideGrid saveData={this.props.answer} canvasHeight={400} canvasWidth={400} />)
         } else {
-            return (<p>{this.getAnswer()}</p>);
+            return (<p>{this.props.answer}</p>);
         }
     }
 
@@ -34,7 +35,7 @@ class VoteSubmission extends Component {
                 </div>
                 <div className="vote-label">
                     <label>👎</label>
-                    <input ref={slider => this.slider = slider} type="range" min="-1" max="1" onChange={this.props.onVote} />
+                    <input ref={this.sliderRef} type="range" min="-1" max="1" onChange={this.onVote} />
                     <label>👍</label>
                 </div>
             </div>

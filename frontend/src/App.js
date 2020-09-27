@@ -59,8 +59,8 @@ class App extends Component {
 			<div className="App">
 				<Header name={this.state.name} page={this.state.page} isConnected={this.state.isConnected}></Header>
 				<Main onNameSet={this.onNameSet} onPageSet={this.onPageSet} setConnectionStatus={this.setConnectionStatus}></Main>
-        <QuizDraw></QuizDraw>
-        <VoteSubmission type="draw" answer={"{\"lines\":[{\"points\":[{\"x\":173.13218573790974,\"y\":2…7cc\",\"brushRadius\":10}],\"width\":400,\"height\":400}"}/>
+        {/* <QuizDraw></QuizDraw>
+        <VoteSubmission type="draw" answer={"{\"lines\":[{\"points\":[{\"x\":173.13218573790974,\"y\":2…7cc\",\"brushRadius\":10}],\"width\":400,\"height\":400}"}/> */}
 			</div>
 		);
 	}
