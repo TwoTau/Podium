@@ -12,21 +12,12 @@ class QuizListItem extends Component {
         super(props);
     }
 
-    onQuizStart = () => {
-        this.props.onQuizStart(this.props.name);
-    }
-
-    onQuizEdit = () =>
-    { 
-        this.props.onQuizEdit(this.props.name);
-    }
-
     render() {
         return (
             <div className="quiz-list-item information-text">
                 <div>
-                    <h2>{this.props.name}</h2>
-                    <h3>Last modified on {this.props.date}</h3>
+                    <h2>{this.props.prompt}</h2>
+                    <h3>{this.props.answers}</h3>
                     <button className='start-quiz' onClick={this.onQuizStart}>Start quiz</button>
                     <button className='edit-quiz' onClick={this.onQuizEdit}>Edit quiz</button>
                 </div>

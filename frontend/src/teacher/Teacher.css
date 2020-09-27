@@ -23,6 +23,30 @@
 	font-size: 32px;
 }
 
+.prompt {
+    font-size: 32px;
+}
+
+.answer-display {
+    padding: 64px;
+	margin: 64px;
+	background: #ddd;
+	font-size: 32px;
+}
+
+.left-side {
+    width: 80%;
+    float: left;
+}
+
+.right-side {
+    margin-left: 80%;
+}
+
+.student-answers-container {
+    font-size: 12px;
+}
+
 .quiz-create button:hover {
 	background: #ccc;
 }
@@ -37,4 +61,50 @@
 	padding: 32px;
 	margin-right: 32px;
 	font-size: 16px;
+}
+
+.quiz-question-card {
+	background: #eee;
+}
+
+.card-prompt {
+	display: flex;
+	justify-content: normal;
+	padding: 16px;
+}
+
+.question-type-selector {
+	padding: 16px;
+	display: flex;
+	justify-content: normal;
+}
+
+
+.card-prompt input {
+	margin-left: 20px;
+	width: 100%;
+}
+
+.text-field {
+	width: 100%;
+	margin-left: 16px;
+	font-size: 24px;
+	outline: none;
+}
+
+[contenteditable=true]:empty:before{
+	content: attr(placeholder);
+	pointer-events: none;
+	display: block;
+	color: #aaa;
+}
+
+.text-field:focus {
+	border-bottom: black 1px solid;
+}
+
+.question-type-dropdown {
+	margin-left: 16px;
+	font-size: 16px;
+	padding: 4px;
 }
