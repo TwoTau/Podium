@@ -3,6 +3,8 @@ import QuizQuestion from "./QuizQuestion";
 import "./Student.css";
 import { server_endpoint, socket_endpoint } from '../config.json';
 import io from 'socket.io-client';
+import Podium from "./Podium";
+import axios from "axios";
 
 class Student extends Component {
 	constructor(props) {
@@ -10,11 +12,14 @@ class Student extends Component {
 
 		// For testing purposes. Delete later.
 		this.state = {
+			students: [],
 			username: 'sirknightj',
 			prompt: "What is 1 + 1?",
 			type: "multiple-choice",
 			answers: ["1 Lorem Ipsum is simply dummy text of the printing and typesetting industry", "2", "3", "4"],
 		};
+
+		this.setStudentList();
 
 		this.props.onPageSet('student');
 
@@ -68,6 +73,17 @@ class Student extends Component {
 		})
 	}
 
+	async setStudentList() {
+		try {
+			const result = await axios.get(server_endpoint + '/students');
+			this.setState({
+				students: result.data.students,
+			});
+		} catch (error) {
+			console.error(error);
+		}
+	}
+
 	submit = (answer) => {
 		return this.io.emit('answer submission', {
 			answer,
@@ -78,6 +94,7 @@ class Student extends Component {
 	render() {
 		return (
 			<div className="student">
+				<Podium students={this.state.students}></Podium>
 				<div>
 					<QuizQuestion prompt={this.state.prompt} answers={this.state.answers} type={this.state.type} placeholder={this.state.placeholder} handleSubmit={this.submit}></QuizQuestion>
 				</div>
