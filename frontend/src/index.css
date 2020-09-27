@@ -1,12 +1,26 @@
+:root {
+  --green-light: #66BF39;
+  --blue-light: #45A3E5;
+  --red-light: #FF3355;
+  --yellow-light: #FFC00A;
+  --green-medium: #26890C;
+  --blue-medium: #1368CE;
+  --red-medium: #E21B3C;
+  --yellow-medium: #FFA602;
+  --green-dark: #106B03;
+  --blue-dark: #0542B9;
+  --red-dark: #C60929;
+  --yellow-dark: #D89E00;
+}
+
 *, ::before, ::after {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

@@ -1,19 +1,50 @@
-.home {
+.App {
+	display: flex;
+	flex-direction: column;
+}
 
+.home {
+	flex-grow: 1;
+	display: flex;
+	flex-direction: row;
+	padding: 64px;
 }
 
 .home-button {
-	display: inline-block;
 	text-decoration: none;
-	padding: 64px;
-	margin: 64px;
+	padding: 256px 64px;
 	font-size: 32px;
-	width: 500px;
-	color: inherit;
-	background: #ddd;
-	transition: 0.2s;
+	color: white;
+	border-radius: 16px;
+	box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+	background: #ccc;
+	transition: 0.2s ease-in-out;
+	text-align: center;
+
+	flex-grow: 1;
+
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+	align-items: center;
 }
 
-.home-button:hover {
-	background: #bbb;
+.home-button span {
+	width: 100%;
+	display: block;
+	font-size: 64px;
+}
+
+.home-button:first-of-type {
+	margin-right: 128px;
+	background: var(--red-light);
+}
+.home-button:first-of-type:hover {
+	background: var(--red-medium);
+}
+.home-button:last-of-type {
+	background: var(--blue-light);
+}
+.home-button:last-of-type:hover {
+	background: var(--blue-medium);
 }

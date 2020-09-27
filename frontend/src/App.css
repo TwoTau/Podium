@@ -1,4 +1,8 @@
 body {
-	/* background: #18191e; */
+	background: #ddd;
+	min-height: 100vh;
+}
+
+.App {
 	min-height: 100vh;
 }
