@@ -118,7 +118,6 @@ class Teacher extends Component {
 	}
 
 	onQuizStart = (quizName) => {
-		alert(`Starting quiz ${quizName}`);
 		this.io.emit('start quiz', {
 			quizName,
 		});
@@ -157,7 +156,6 @@ class Teacher extends Component {
 	}
 
 	onNextQuestion = () => {
-		alert('Event: "next question" emitted'); // TODO: Delete this later
 		this.io.emit('next question');
 	}
 

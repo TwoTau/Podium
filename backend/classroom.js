@@ -57,6 +57,7 @@ class Classroom {
 
 		if (this.state !== 'teacher joined' && this.state !== 'quiz ended') {
 			socket.emit('quiz start');
+			socket.emit('new question', this.quiz.questions[this.currQuestion]);
 		}
 
 		socket.on('disconnect', () => {
@@ -143,7 +144,7 @@ class Classroom {
 			return;
 		}
 
-		console.log(`${student} answered "${data.answer}"`);
+		console.log(`${student} answered "${answer}"`);
 
 		this.answers.push({
 			student,

@@ -63,16 +63,22 @@ class Student extends Component {
 		socket.on("disconnect", (reason) => {
 			console.log(`Your connection to the server has been lost: ${reason}.`);
 			this.props.setConnectionStatus(false);
-		});
-
-		socket.on('quiz start', (data) => {
 			this.setState({
-				hasQuizStarted: true,
+				hasQuizStarted: false,
 			});
 		});
 
+		socket.on('quiz start', (data) => {
+			// this.setState({
+			// 	hasQuizStarted: true,
+			// });
+		});
+
 		socket.on("new question", (question) => {
-			this.setState({ ...question });
+			this.setState({
+				...question,
+				hasQuizStarted: true,
+			});
 		});
 
 		socket.on("quiz end", () => {

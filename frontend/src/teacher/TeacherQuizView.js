@@ -35,12 +35,16 @@ class TeacherQuizView extends Component {
     }
 
     render() {
+        let prompt = "Click 'Next' to start the quiz";
+		if (this.props.prompt) {
+			prompt = `Q: ${this.props.prompt}`;
+		}
         return (
             <div>
                 <div className="left-side">
                     <div className="quiz-question">
                         <div className="prompt">
-                            <h2>Q: {this.props.prompt}</h2>
+                            <h2>{prompt}</h2>
                         </div>
                         <div className="student-answers-container">
                             {this.getAnswers()}
