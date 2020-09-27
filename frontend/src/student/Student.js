@@ -16,8 +16,7 @@ class Student extends Component {
 			hasQuizStarted: false,
 			username: 'sirknightj',
 			prompt: "What is 1 + 1?",
-			type: "multiple-choice",
-			answers: ["1 Lorem Ipsum is simply dummy text of the printing and typesetting industry", "2", "3", "4"],
+			type: "short-answer",
 		};
 
 		this.setStudentList();

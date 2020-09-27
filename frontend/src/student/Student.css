@@ -5,12 +5,15 @@
 .student.quiz-started .podium {
 	display: none;
 }
+
 .student.quiz-started .quiz-question-container {
 	display: block;
 }
+
 .student.quiz-not-started .podium {
 	display: block;
 }
+
 .student.quiz-not-started .quiz-question-container {
 	display: none;
 }
@@ -31,19 +34,6 @@
 
 .prompt h2 {
 	font-size: 48px;
-}
-
-.quiz-choice-button {
-	padding: 64px;
-	margin: 64px;
-	background: #ddd;
-	font-size: 32px;
-	transition: 0.2s;
-	width: calc(50% - 128px);
-}
-
-.quiz-choice-button:hover {
-	background: #ccc;
 }
 
 .quiz-short-answer {
