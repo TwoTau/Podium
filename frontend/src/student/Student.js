@@ -7,6 +7,9 @@ import Podium from "./Podium";
 import VoteGallery from "./VoteGallery";
 import axios from "axios";
 
+const colors = ['green', 'blue', 'yellow', 'red'];
+let index = 0;
+
 class Student extends Component {
 	constructor(props) {
 		super(props);
@@ -80,6 +83,9 @@ class Student extends Component {
 				hasQuizStarted: true,
 				answers: [],
 			});
+
+			let color = colors[(index++) % colors.length];
+			document.body.style.background = `var(--${color}-medium)`;
 		});
 
 		socket.on('submission end', (data) => {

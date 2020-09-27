@@ -41,13 +41,13 @@ class QuizDraw extends Component {
 
 	render() {
 		return (
-			<div className="quiz-short-answer">
+			<div className="quiz-draw">
 				<DrawingBoard ref={drawingBoard => this.drawingBoard = drawingBoard} canvasWidth={400} canvasHeight={400} brushRadius={this.state.brushRadius}/>
-				<button disabled={this.state.hasSubmitted} onClick={this.decreaseBrushSize}>-</button>
-				<button disabled={this.state.hasSubmitted} onClick={this.increaseBrushSize}>+</button>
+				<button className="brush-size-change" disabled={this.state.hasSubmitted} onClick={this.decreaseBrushSize}>-</button>
+				<button className="brush-size-change" disabled={this.state.hasSubmitted} onClick={this.increaseBrushSize}>+</button>
 				<button disabled={this.state.hasSubmitted} onClick={this.undoLastMove}>Undo</button>
 				<button disabled={this.state.hasSubmitted} onClick={this.clearDrawingBoard}>Clear drawing</button>
-				<button disabled={this.state.hasSubmitted} onClick={this.onSubmit}>Submit drawing</button>
+				<button className="submit-drawing" disabled={this.state.hasSubmitted} onClick={this.onSubmit}>Submit drawing</button>
 			</div>
 		);
 	}

@@ -21,7 +21,6 @@
 		{
 			"username": "mrs-teacher-name",
 			"quizzes": [
-				"easy math quiz",
 				"geography quiz",
 				"biology quiz",
 				"financial literacy quiz"
@@ -30,36 +29,11 @@
 	],
 	"quizzes": [
 		{
-			"name": "easy math quiz",
-			"created": "2020-09-25",
-			"questions": [
-				{
-					"prompt": "What is 1+1?",
-					"type": "short-answer",
-					"placeholder": "a number"
-				},
-				{
-					"prompt": "What is an eigenvalue of a singular matrix?",
-					"type": "short-answer",
-					"placeholder": "a number"
-				},
-				{
-					"prompt": "Draw a happy 3x4 matrix",
-					"type": "draw"
-				},
-				{
-					"prompt": "What is the determinant of [[1, 2], [3, 4]]?",
-					"type": "short-answer",
-					"placeholder": "Determinant"
-				}
-			]
-		},
-		{
 			"name": "geography quiz",
-			"created": "2020-09-26",
+			"created": "September 25, 2020",
 			"questions": [
 				{
-					"prompt": "What is the capital of Canada",
+					"prompt": "What is the capital of Canada?",
 					"type": "short-answer",
 					"placeholder": "City name"
 				},
@@ -69,14 +43,14 @@
 					"placeholder": "a number"
 				},
 				{
-					"prompt": "Draw the Canadian flag",
+					"prompt": "Draw the Canadian flag.",
 					"type": "draw"
 				}
 			]
 		},
 		{
 			"name": "biology quiz",
-			"created": "2020-09-26",
+			"created": "September 26, 2020",
 			"questions": [
 				{
 					"prompt": "Draw the four phases of mitosis.",
@@ -99,7 +73,7 @@
 		},
 		{
 			"name": "financial literacy quiz",
-			"created": "2020-09-26",
+			"created": "September 27, 2020",
 			"questions": [
 				{
 					"prompt": "Outline the benefits of automating ones finances.",

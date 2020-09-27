@@ -15,6 +15,9 @@
 	background: #fff;
 	transition: 0.2s;
 }
+.teacher-nav button:hover {
+	background: #eee;
+}
 
 .teacher-nav button.selected {
 	background: var(--yellow-light);

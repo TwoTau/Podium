@@ -11,11 +11,16 @@ import CanvasDraw from "react-canvas-draw";
 class VoteSubmission extends Component {
     constructor(props) {
         super(props);
-        this.sliderRef = React.createRef();
+        this.state = {
+            value: 0,
+        };
     }
 
     onVote = (event) => {
-        const answer = +this.sliderRef.current.value;
+        const answer = +event.target.value;
+        this.setState({
+            value: event.target.value,
+        });
         this.props.onVote(this.props.student, answer);
     }
 
@@ -36,9 +41,9 @@ class VoteSubmission extends Component {
                         Student: {this.props.student}
                     </div>
                 </div>
-                <div className="vote-label">
+                <div className="vote-label" data-value={this.state.value}>
                     <label>👎</label>
-                    <input ref={this.sliderRef} type="range" min="-1" max="1" value="0" onChange={this.onVote} />
+                    <input type="range" min="-1" max="1" value={this.state.value} onChange={this.onVote} />
                     <label>👍</label>
                 </div>
             </div>
