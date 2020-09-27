@@ -4,6 +4,7 @@ import React, { Component } from "react";
  * Props:
  * - student: string
  * - answer: string
+ * - onVote: function to vote for a student
  */
 class VoteSubmission extends Component {
     constructor(props) {

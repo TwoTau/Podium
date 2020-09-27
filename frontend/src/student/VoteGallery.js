@@ -4,6 +4,7 @@ import VoteSubmission from "./VoteSubmission";
 /**
  * Props:
  * - answers: array of {student: string, answer: string}
+ * - onVote: function to vote for a student
  */
 class VoteGallery extends Component {
     constructor(props) {
