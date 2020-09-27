@@ -6,6 +6,7 @@ class Home extends Component {
 	constructor(props) {
 		super(props);
 		this.props.onPageSet('Home');
+		this.props.setConnectionStatus(false);
 	}
 
 	render() {

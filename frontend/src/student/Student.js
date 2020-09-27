@@ -17,6 +17,9 @@ class Student extends Component {
 		};
 
 		this.props.onPageSet('student');
+
+		this.state.username = prompt('What is your username?') || 'sirknightj';
+
 		this.props.onNameSet(this.state.username);
 
 		// Opens up a socket to the database
@@ -25,8 +28,10 @@ class Student extends Component {
 		this.io = socket;
 
 		socket.on("connect", () => {
+			this.props.setConnectionStatus(true);
 			this.io.emit('new student', {
-				username: this.state.username || 'Anonymous'
+				username: this.state.username || 'Anonymous',
+				teacher: 'mrs-teacher-name',
 			});
 			console.log("Successfully connected to the database!");
 		});
@@ -41,10 +46,16 @@ class Student extends Component {
 			});
 		});
 
+		socket.on('invalid teacher', () => {
+			alert('The teacher name is invalid. The teacher must be logged in first. Refresh to try again with a different teacher, or later.');
+		});
+		socket.on('invalid username', () => {
+			alert('That username is already in use with this teacher. Refresh to try with a different username.');
+		});
+
 		socket.on("disconnect", (reason) => {
-			alert('Your connection to the server has been lost.')
-			console.log(`Your connection to the server has been lost: ${reason}`);
-			socket.open();
+			console.log(`Your connection to the server has been lost: ${reason}.`);
+			this.props.setConnectionStatus(false);
 		});
 	}
 

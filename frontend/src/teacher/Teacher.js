@@ -36,11 +36,22 @@ class Teacher extends Component {
 		this.io = socket;
 
 		socket.on("connect", () => {
+			this.props.setConnectionStatus(true);
+
 			this.io.emit('new teacher', {
 				username: this.state.username || 'Anonymous'
 			});
 
+			this.io.on('classroom in use', () => {
+				alert('A teacher with that username is already logged in. Close that tab and refresh to try with a different username.');
+			});
+
 			console.log("Successfully connected to the database!");
+		});
+
+		socket.on("disconnect", (reason) => {
+			console.log(`Your connection to the server has been lost: ${reason}.`);
+			this.props.setConnectionStatus(false);
 		});
 	}
 
