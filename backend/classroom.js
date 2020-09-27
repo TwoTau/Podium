@@ -55,6 +55,10 @@ class Classroom {
 
 		this.sendUpdate();
 
+		if (this.state !== 'teacher joined' && this.state !== 'quiz ended') {
+			socket.emit('quiz start');
+		}
+
 		socket.on('disconnect', () => {
 			const index = this.students.indexOf(socket);
 			if (index > -1) {
@@ -96,6 +100,8 @@ class Classroom {
 			console.error(`No quiz with name "${quizName}" found`);
 			return;
 		}
+
+		this.sendAll('quiz start');
 
 		console.log(`Starting quiz "${quizName}"`);
 

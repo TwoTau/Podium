@@ -13,6 +13,7 @@ class Student extends Component {
 		// For testing purposes. Delete later.
 		this.state = {
 			students: [],
+			hasQuizStarted: false,
 			username: 'sirknightj',
 			prompt: "What is 1 + 1?",
 			type: "multiple-choice",
@@ -64,6 +65,12 @@ class Student extends Component {
 			this.props.setConnectionStatus(false);
 		});
 
+		socket.on('quiz start', (data) => {
+			this.setState({
+				hasQuizStarted: true,
+			});
+		});
+
 		socket.on("new question", (question) => {
 			this.setState({ ...question });
 		});
@@ -93,9 +100,9 @@ class Student extends Component {
 
 	render() {
 		return (
-			<div className="student">
+			<div className={"student " + (this.state.hasQuizStarted ? "quiz-started" : "quiz-not-started")}>
 				<Podium students={this.state.students}></Podium>
-				<div>
+				<div className="quiz-question-container">
 					<QuizQuestion prompt={this.state.prompt} answers={this.state.answers} type={this.state.type} placeholder={this.state.placeholder} handleSubmit={this.submit}></QuizQuestion>
 				</div>
 			</div>

@@ -2,6 +2,19 @@
 	padding: 64px;
 }
 
+.student.quiz-started .podium {
+	display: none;
+}
+.student.quiz-started .quiz-question-container {
+	display: block;
+}
+.student.quiz-not-started .podium {
+	display: block;
+}
+.student.quiz-not-started .quiz-question-container {
+	display: none;
+}
+
 .quiz-question {
 	background: #eee;
 	margin-bottom: 64px;
