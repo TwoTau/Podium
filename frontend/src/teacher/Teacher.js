@@ -23,6 +23,9 @@ class Teacher extends Component {
 			contentType: this.contentStates.STUDENT_LIST,
 			quizzes: [],
 			students: [],
+			prompt: null,
+			questionType: null,
+			placeholder: null,
 		};
 
 		this.setStudentList();
@@ -43,7 +46,7 @@ class Teacher extends Component {
 				username: this.state.username || 'Anonymous'
 			});
 
-			this.io.on('classroom in use', () => {
+			socket.on('classroom in use', () => {
 				alert('A teacher with that username is already logged in. Close that tab and refresh to try with a different username.');
 			});
 
@@ -59,6 +62,14 @@ class Teacher extends Component {
 			console.log(students)
 			this.setState({students: students});
 		})
+
+		socket.on("new question", (data) => {
+			this.setState({
+				prompt: data.prompt,
+				questionType: data.type,
+				placeholder: data.placeholder,
+			});
+		});
 	}
 
 	async setStudentList() {
@@ -192,6 +203,7 @@ class Teacher extends Component {
 				</div>
 				<div className={this.state.contentType === this.contentStates.QUIZ_IN_SESSION ? 'show' : 'hide'}>
 					<QuizView
+						prompt={this.state.prompt}
 						unanswered={this.getUnanswered() || []}
 						answered={this.getAnswered() || []}
 						answers={this.getAnswers() || []}
