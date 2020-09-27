@@ -176,10 +176,7 @@ class Classroom {
 		answer.votes += vote;
 
 		this.sendAll('question vote', {
-			answers: this.answers.map((a) => ({
-				student: a.student,
-				votes: a.votes,
-			})),
+			answers: this.answers,
 		});
 	}
 }

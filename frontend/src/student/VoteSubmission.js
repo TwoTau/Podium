@@ -18,10 +18,11 @@ class VoteSubmission extends Component {
 
     onVote = (event) => {
         const answer = +event.target.value;
+        const prevValue = this.state.value;
         this.setState({
             value: event.target.value,
         });
-        this.props.onVote(this.props.student, answer);
+        this.props.onVote(this.props.student, answer - prevValue);
     }
 
     getAnswer = () => {
@@ -39,6 +40,9 @@ class VoteSubmission extends Component {
                     {this.getAnswer()}
                     <div className="student-box">
                         Student: {this.props.student}
+                    </div>
+                    <div className="current-votes">
+                        <p>{this.props.votes} votes</p>
                     </div>
                 </div>
                 <div className="vote-label" data-value={this.state.value}>
