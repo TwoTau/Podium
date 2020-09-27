@@ -27,7 +27,7 @@ class QuizQuestion extends Component {
 		return (
 			<div className="quiz-question">
 				<div className="prompt">
-					<h2>Q: {this.props.prompt}</h2>
+					<h2>{this.props.prompt}</h2>
 				</div>
 				<div className="answer-container">
 					{this.getInner()}

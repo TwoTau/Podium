@@ -23,19 +23,22 @@ class VoteSubmission extends Component {
         if (this.props.type === 'draw') {
             return (<CanvasDraw disabled hideGrid saveData={this.props.answer} canvasHeight={400} canvasWidth={400} />)
         } else {
-            return (<p>{this.props.answer}</p>);
+            return (<p>Answer: {this.props.answer}</p>);
         }
     }
 
     render() {
         return (
-            <div className={"vote-submission"}>
+            <div className="vote-submission">
                 <div className="answer-box">
                     {this.getAnswer()}
+                    <div className="student-box">
+                        Student: {this.props.student}
+                    </div>
                 </div>
                 <div className="vote-label">
                     <label>👎</label>
-                    <input ref={this.sliderRef} type="range" min="-1" max="1" onChange={this.onVote} />
+                    <input ref={this.sliderRef} type="range" min="-1" max="1" value="0" onChange={this.onVote} />
                     <label>👍</label>
                 </div>
             </div>

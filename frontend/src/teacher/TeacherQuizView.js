@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import VoteGallery from "../student/VoteGallery";
 
 /**
  * Props
  * - prompt: the prompt of this question
+ * - type: type of this question
  * - answered: list of students that have already answered
  * - unanswered: list of students that have not answered yet
  * - answers: list of submitted answers
@@ -59,7 +61,7 @@ class TeacherQuizView extends Component {
                             <h2>Q: {this.props.prompt}</h2>
                         </div>
                         <div className="student-answers-container">
-                            {this.getAnswers()}
+                            <VoteGallery prompt={this.props.prompt} type={this.props.type} answers={this.props.answers} onVote={null}/>
                         </div>
                         <div className={"teacher-quiz-view-control-buttons " + (this.state.allowingSubmissions ? "submission-period" : "voting-period")}>
                             <button onClick={this.handleEndSubmissions}>End Submissions</button>

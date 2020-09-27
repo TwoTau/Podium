@@ -15,9 +15,11 @@ class VoteGallery extends Component {
 
     render() {
         return (
-            <div>
-                <h1>{`Q: ${this.props.prompt}`}</h1>
-                <div className={"vote-gallery"}>
+            <div className="vote-gallery-container">
+                <div className="prompt">
+                    <h2><span className="vote-heading">VOTE</span> {this.props.prompt}</h2>
+                </div>
+                <div className="vote-gallery">
                     {this.props.answers.map(s => (
                         <VoteSubmission type={this.props.type} key={s.student} student={s.student} answer={s.answer} onVote={this.props.onVote} />
                     ))}

@@ -78,7 +78,7 @@ class Teacher extends Component {
 			let { student, answer } = data;
 			this.setState((state) => ({
 				studentsAnswered: [...state.studentsAnswered, student],
-				answers: [...state.answers, answer],
+				answers: [...state.answers, { answer, student }],
 			}));
 		});
 	}
@@ -176,12 +176,10 @@ class Teacher extends Component {
 	}
 
 	onEndSubmission = () => {
-		alert('Event: "end submission" emitted'); // TODO: Delete this later
 		this.io.emit('end submission');
 	}
 
 	onQuizEnd = () => {
-		alert('Event: "end quiz" emitted'); // TODO: Delete this later
 		this.io.emit('end quiz');
 	}
 
@@ -191,10 +189,6 @@ class Teacher extends Component {
 
 	getAnswered = () => {
 		return this.state.studentsAnswered;
-	}
-
-	getAnswers = () => {
-		// TODO: return the list of submitted answers to be displayed
 	}
 
 	render() {
@@ -218,6 +212,7 @@ class Teacher extends Component {
 				<div className={this.state.contentType === this.contentStates.QUIZ_IN_SESSION ? 'show' : 'hide'}>
 					<QuizView
 						prompt={this.state.prompt}
+						type={this.state.questionType}
 						unanswered={this.getUnanswered() || []}
 						answered={this.getAnswered() || []}
 						answers={this.state.answers}

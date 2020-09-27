@@ -22,18 +22,39 @@
 	display: none;
 }
 
-.quiz-question {
-	background: #eee;
+.quiz-question, .vote-gallery-container {
+	background: #fff;
 	margin-bottom: 64px;
 }
 
+.vote-heading {
+	opacity: 0.2;
+}
+
+.student .student-box {
+	display: none;
+}
+
+.student-box {
+	font-size: 24px;
+}
+
+.vote-submission {
+	background: #eee;
+	/* padding: 64px; */
+}
+
 .answer-box {
-	border: black 5px solid;
-	width: fit-content;
+	font-size: 24px;
+	padding: 64px;
+	background: #ddd;
+	font-weight: bold;
+}
+.vote-label {
+	padding: 64px;
 }
 
 .prompt {
-	background: #ddd;
 	padding: 64px;
 }
 
@@ -45,25 +66,27 @@
 	font-size: 48px;
 }
 
-.quiz-short-answer {
+.quiz-short-answer, .vote-gallery {
 	padding: 64px;
+	padding-top: 0;
 }
 
 .quiz-short-answer input {
 	padding: 32px;
 	font-size: 32px;
 	width: 50%;
+	background: #e0e0e0;
 }
 
 .quiz-short-answer button {
 	padding: 32px;
 	font-size: 32px;
-	background: #ddd;
+	background: var(--green-light);
 	transition: 0.2s;
 }
 
 .quiz-short-answer button:hover {
-	background: #ccc;
+	background: var(--blue-light);
 }
 
 .podium {

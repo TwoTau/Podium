@@ -27,6 +27,7 @@
 .student-list {
 	font-size: 36px;
 }
+
 .student-list div {
 	background: #eee;
 	margin-bottom: 32px;
@@ -41,6 +42,7 @@
 	padding: 32px 64px;
 	display: inline-block;
 }
+
 .student-list .score {
 	background: rgba(250, 250, 250, 0.2);
 }
@@ -48,46 +50,76 @@
 .student-list div:nth-child(4n-3), .quiz-list-item:nth-child(4n-3) {
 	background: var(--green-light);
 }
+
 .student-list div:nth-child(4n-2), .quiz-list-item:nth-child(4n-2) {
 	background: var(--blue-light);
 }
+
 .student-list div:nth-child(4n-1), .quiz-list-item:nth-child(4n-1) {
 	background: var(--yellow-light);
 }
+
 .student-list div:nth-child(4n), .quiz-list-item:nth-child(4n) {
 	background: var(--red-light);
 }
 
 .prompt {
-    font-size: 32px;
+	font-size: 32px;
 }
 
 .answer-display {
-    padding: 64px;
+	padding: 64px;
 	margin: 64px;
 	background: #ddd;
 	font-size: 32px;
 }
 
 .left-side {
-    width: 80%;
-    float: left;
+	width: 80%;
+	float: left;
 }
 
 .right-side {
-    margin-left: 80%;
+	margin-left: 80%;
 }
 
-.teacher-quiz-view-control-buttons.voting-period button:first-of-type {
-	display: none;
+.teacher .vote-gallery-container {
+	margin-bottom: 0;
 }
-.teacher-quiz-view-control-buttons.submission-period button:last-of-type {
+
+.teacher-quiz-view-control-buttons button {
+	color: white;
+	transition: 0.2s ease-in-out;
+	margin-left: 64px;
+	margin-bottom: 64px;
+}
+.teacher-quiz-view-control-buttons button:first-of-type {
+	background: var(--blue-light);
+}
+.teacher-quiz-view-control-buttons button:last-of-type {
+	background: var(--red-light);
+}
+.teacher-quiz-view-control-buttons button:first-of-type:hover {
+	background: var(--blue-medium);
+}
+.teacher-quiz-view-control-buttons button:last-of-type:hover {
+	background: var(--red-medium);
+}
+
+.teacher-quiz-view-control-buttons.voting-period button:first-of-type { /* end submissions */
 	display: none;
 }
 
+.teacher-quiz-view-control-buttons.submission-period button:last-of-type { /* next question */
+	display: none;
+}
+
+.teacher .vote-gallery-container .prompt, .teacher .vote-label {
+	display: none;
+}
 
 .student-answers-container {
-    font-size: 12px;
+	font-size: 12px;
 }
 
 .quiz-create button:hover {
@@ -119,6 +151,7 @@
 	background: rgba(250, 250, 250, 0.7);
 	transition: 0.2s ease-in-out;
 }
+
 .quiz-list-item button:hover {
 	background: rgba(250, 250, 250, 1);
 }
@@ -139,7 +172,6 @@
 	justify-content: normal;
 }
 
-
 .card-prompt input {
 	margin-left: 20px;
 	width: 100%;
@@ -152,7 +184,7 @@
 	outline: none;
 }
 
-[contenteditable=true]:empty:before{
+[contenteditable=true]:empty:before {
 	content: attr(placeholder);
 	pointer-events: none;
 	display: block;
