@@ -55,7 +55,8 @@ class Teacher extends Component {
 			this.props.setConnectionStatus(false);
 		});
 
-		socket.on("user update", (students) => {
+		socket.on("user update", ({students}) => {
+			console.log(students)
 			this.setState({students: students});
 		})
 	}

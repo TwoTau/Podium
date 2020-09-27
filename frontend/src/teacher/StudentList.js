@@ -10,6 +10,7 @@ class StudentList extends Component {
     }
 
     render() {
+        console.log(this.props.students)
         return (
             <div className="information-text">
                 <h1>StudentList</h1>

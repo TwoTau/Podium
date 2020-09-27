@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
 app.get('/students', (req, res) => {
 	console.log('Got request for all students');
 
-	const students = db
+	const students = this.db
 		.get('students')
 		.value();
 
@@ -46,7 +46,7 @@ app.get('/teacher/quizlist', (req, res) => {
 
 	console.log('Got request for quiz list for ' + req.query.username);
 
-	const teacher = db
+	const teacher = this.db
 		.get('teachers')
 		.find({ username: req.query.username })
 		.value();
@@ -57,7 +57,7 @@ app.get('/teacher/quizlist', (req, res) => {
 		return;
 	}
 
-	const quizzes = db
+	const quizzes = this.db
 		.get('quizzes')
 		.filter((q) => teacher.quizzes.includes(q.name))
 		.map((q) => ({
@@ -83,12 +83,12 @@ app.post('/teacher/createquiz', (req, res) => {
 	}
 
 	console.log('Got request for create quiz');
-	const testCreateQuiz = db
+	const testCreateQuiz = this.db
 		.get('quizzes')
 		.push(req.body.quiz)
 		.write();
 
-	const quizzes = db
+	const quizzes = this.db
 		.get('quizzes')
 		.filter((q) => teacher.quizzes.includes(q.name))
 		.map((q) => ({
