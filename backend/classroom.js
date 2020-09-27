@@ -190,7 +190,7 @@ class Classroom {
 			.find({
 				username: student
 			})
-			.update('score', n => n += deltaScore)
+			.update('score', n => n += deltaScore * 100)
 			.write();
 	}
 
