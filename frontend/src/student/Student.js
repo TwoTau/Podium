@@ -18,7 +18,7 @@ class Student extends Component {
 		this.state = {
 			students: [],
 			hasQuizStarted: false,
-			username: 'sirknightj',
+			username: 'Jeremy',
 			prompt: "What is 1 + 1?",
 			type: "short-answer",
 			answers: [],
@@ -29,7 +29,7 @@ class Student extends Component {
 
 		this.props.onPageSet('student');
 
-		this.state.username = prompt('What is your username?') || 'sirknightj';
+		this.state.username = prompt('What is your username?') || 'Jeremy';
 
 		this.props.onNameSet(this.state.username);
 
@@ -42,7 +42,7 @@ class Student extends Component {
 			this.props.setConnectionStatus(true);
 			this.io.emit('new student', {
 				username: this.state.username || 'Anonymous',
-				teacher: 'mrs-teacher-name',
+				teacher: 'Mrs. Anderson',
 			});
 			console.log("Successfully connected to the database!");
 		});

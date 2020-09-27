@@ -19,7 +19,7 @@ class Teacher extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			username: 'mrs-teacher-name', // TODO
+			username: 'Mrs. Anderson', // TODO
 			contentType: this.contentStates.STUDENT_LIST,
 			quizzes: [],
 			allStudents: [],
