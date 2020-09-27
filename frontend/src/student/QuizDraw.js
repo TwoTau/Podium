@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import DrawingBoard from "react-canvas-draw";
 
 /**
  * Props:
@@ -10,14 +11,23 @@ class QuizDraw extends Component {
 	}
 
 	onSubmit = (event) => {
-		const answer = null; // TODO
-		this.props.onSubmit(answer);
+		this.props.onSubmit(this.drawingBoard.getSaveData());
+	}
+
+	clearDrawingBoard = () => {
+		this.drawingBoard.clear();
+	}
+
+	undoLastMove = () => {
+		this.drawingBoard.undo();
 	}
 
 	render() {
 		return (
 			<div className="quiz-short-answer">
-				{/* TODO */}
+				<DrawingBoard ref={drawingBoard => this.drawingBoard = drawingBoard} canvasWidth={600} canvasHeight={600}/>
+				<button onClick={this.undoLastMove}>Undo</button>
+				<button onClick={this.clearDrawingBoard}>Clear drawing</button>
 				<button onClick={this.onSubmit}>Submit drawing</button>
 			</div>
 		);
