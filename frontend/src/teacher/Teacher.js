@@ -36,11 +36,22 @@ class Teacher extends Component {
 		this.io = socket;
 
 		socket.on("connect", () => {
+			this.props.setConnectionStatus(true);
+
 			this.io.emit('new teacher', {
 				username: this.state.username || 'Anonymous'
 			});
 
+			this.io.on('classroom in use', () => {
+				alert('A teacher with that username is already logged in. Close that tab and refresh to try with a different username.');
+			});
+
 			console.log("Successfully connected to the database!");
+		});
+
+		socket.on("disconnect", (reason) => {
+			console.log(`Your connection to the server has been lost: ${reason}.`);
+			this.props.setConnectionStatus(false);
 		});
 	}
 
@@ -96,31 +107,25 @@ class Teacher extends Component {
 		});
 	}
 
-	onQuizEdit = (quizName) =>
-	{
+	onQuizEdit = (quizName) => {
 		this.setState({
 			editQuizName: quizName,
 			contentType: this.contentStates.CREATE_QUIZ,
 		});
 	}
 
-	onQuizSubmit = async (quiz) =>
-	{
+	onQuizSubmit = async (quiz) => {
 		quiz.created = new Date();
 		this.setState({
 			contentType: this.contentStates.QUIZ_LIST,
 		});
 		try {
-			const data = {
-				username: this.state.username,
-				quiz: quiz,
-				body: {
+			const result = await axios.post(server_endpoint + '/teacher/createquiz', {
+				params: {
 					username: this.state.username,
 					quiz: quiz,
 				},
-			};
-			console.log(data);
-			const result = await axios.post(server_endpoint + '/teacher/createquiz', data);
+			});
 			// Set quizes to updated list of quizes
 			this.setState({
 				quizzes: result.data.quizzes,
@@ -130,7 +135,7 @@ class Teacher extends Component {
 		}
 	}
 
-	
+
 	getUnanswered = () => {
 		// TODO: return the list of students that have not answered yet
 	}

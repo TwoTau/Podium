@@ -6,6 +6,7 @@ const io = require('socket.io')(http);
 
 const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
+const Classroom = require('./classroom');
 const db = low(new FileSync('db.json'));
 
 // initialize with default data if db is empty
@@ -16,6 +17,8 @@ const PORT = process.env.PORT || 8000;
 app.use(cors({
 	origin: 'http://localhost:3000'
 }));
+
+app.use(express.json());
 
 app.get('/', (req, res) => {
 	console.log('Got request to /');
@@ -100,16 +103,8 @@ app.post('/teacher/createquiz', (req, res) => {
 	});
 });
 
-const studentSockets = [];
-let teacherSocket = null;
-
-// maps classroom name to studentSockets list and teacherSocket
-const classroom = {
-	"some-name": {
-		studentSockets: [],
-		teacherSocket: null
-	}
-};
+// maps teacher name to Classroom
+const classrooms = {};
 
 io.on('connection', (socket) => {
 	console.log('New client connected');
@@ -119,60 +114,42 @@ io.on('connection', (socket) => {
 	});
 
 	socket.on('new student', (data) => {
-		handleStudent(socket, data.username);
+		handleStudent(socket, data.username, data.teacher);
 	});
 });
 
 function handleTeacher(socket, username) {
-	teacherSocket = socket;
+	let classroom = classrooms[username];
 
-	socket.on('disconnect', () => {
-		teacherSocket = null;
-		console.log(`Teacher with username ${username} disconnected.`);
+	if (classroom) { // error if teacher with same name already connected
+		console.log(`Classroom "${username} is already open. Closing connection.`);
+		socket.emit('classroom in use');
+		socket.disconnect();
+		return;
+	}
+
+	classroom = new Classroom(db, io, socket, username, () => {
+		delete classrooms[username];
 	});
-
-	socket.on('start quiz', (data) => {
-		// assume quizName is a valid quiz name
-		let quizName = data.quizName;
-		const quiz = db
-			.get('quizzes')
-			.find({ name: quizName })
-			.value();
-
-		if (!quiz) {
-			console.error(`No quiz with name "${quizName}" found`);
-			return;
-		}
-
-		console.log(`Starting quiz "${quizName}"`);
-
-		startQuiz(quiz);
-	});
+	classrooms[username] = classroom;
 }
 
-function handleStudent(socket, username) {
-	socket.username = username;
-	studentSockets.push(socket);
-	console.log(`New student with username "${username}" connected. Current users: ${studentSockets.length}`);
+function handleStudent(socket, username, teacher) {
+	const classroom = classrooms[teacher];
 
-	socket.on('disconnect', () => {
-		const index = studentSockets.indexOf(socket);
-		if (index > -1) {
-			studentSockets.splice(index, 1);
-		}
-		console.log(`Client with username ${username} disconnected. Current users: ${studentSockets.length}`);
-	});
+	if (!classroom) { // error if teacher NOT already connected
+		console.log(`New student ${username} tried connecting to nonexistent classroom ${teacher}. Closing connection.`);
+		socket.emit('invalid teacher');
+		socket.disconnect();
+		return;
+	} else if (classroom.hasStudent(username)) { // error if username already connected to classroom
+		console.log(`Student ${username} tried connecting to ${teacher} but has already connected. Closing connection.`);
+		socket.emit('invalid username');
+		socket.disconnect();
+		return;
+	}
 
-	socket.on('answer submission', (data) => {
-		console.log(`${username} answered "${data.answer}"`);
-	});
-}
-
-function startQuiz(quizData) {
-	let questions = quizData.questions;
-	let currQuestionIndex = 0;
-
-	io.emit('new question', questions[currQuestionIndex]);
+	classroom.addStudent(socket, username);
 }
 
 http.listen(PORT, () => {

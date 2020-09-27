@@ -33,29 +33,13 @@
 			"questions": [
 				{
 					"prompt": "What is 1+1?",
-					"type": "multiple-choice",
-					"answers": [
-						"1",
-						"2",
-						"3",
-						"4"
-					]
+					"type": "short-answer",
+					"placeholder": "a number"
 				},
 				{
-					"prompt": "Is 0 always an eigenvalue of a singular matrix?",
-					"type": "multiple-choice",
-					"answers": [
-						"Yes",
-						"No"
-					]
-				},
-				{
-					"prompt": "Can you multiply a 3x4 matrix with a 4x2 matrix?",
-					"type": "multiple-choice",
-					"answers": [
-						"Yes",
-						"No"
-					]
+					"prompt": "What is an eigenvalue of a singular matrix?",
+					"type": "short-answer",
+					"placeholder": "a number"
 				},
 				{
 					"prompt": "Draw a happy 3x4 matrix",
@@ -79,14 +63,8 @@
 				},
 				{
 					"prompt": "How many Great Lakes are there?",
-					"type": "multiple-choice",
-					"answers": [
-						"5",
-						"1",
-						"2",
-						"3",
-						"4"
-					]
+					"type": "short-answer",
+					"placeholder": "a number"
 				},
 				{
 					"prompt": "Draw the Canadian flag",
