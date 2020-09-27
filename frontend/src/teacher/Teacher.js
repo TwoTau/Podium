@@ -110,12 +110,16 @@ class Teacher extends Component {
 			contentType: this.contentStates.QUIZ_LIST,
 		});
 		try {
-			const result = await axios.post(server_endpoint + '/teacher/createquiz', {
-				params: {
+			const data = {
+				username: this.state.username,
+				quiz: quiz,
+				body: {
 					username: this.state.username,
 					quiz: quiz,
 				},
-			});
+			};
+			console.log(data);
+			const result = await axios.post(server_endpoint + '/teacher/createquiz', data);
 			// Set quizes to updated list of quizes
 			this.setState({
 				quizzes: result.data.quizzes,
