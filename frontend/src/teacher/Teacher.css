@@ -43,6 +43,14 @@
     margin-left: 80%;
 }
 
+.teacher-quiz-view-control-buttons.voting-period button:first-of-type {
+	display: none;
+}
+.teacher-quiz-view-control-buttons.submission-period button:last-of-type {
+	display: none;
+}
+
+
 .student-answers-container {
     font-size: 12px;
 }
