@@ -23,6 +23,11 @@
 	margin-bottom: 64px;
 }
 
+.answer-box {
+	border: black 5px solid;
+	width: fit-content;
+}
+
 .prompt {
 	background: #ddd;
 	padding: 64px;

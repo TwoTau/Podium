@@ -25,7 +25,7 @@ class QuizDraw extends Component {
 	render() {
 		return (
 			<div className="quiz-short-answer">
-				<DrawingBoard ref={drawingBoard => this.drawingBoard = drawingBoard} canvasWidth={600} canvasHeight={600}/>
+				<DrawingBoard ref={drawingBoard => this.drawingBoard = drawingBoard} canvasWidth={400} canvasHeight={400}/>
 				<button onClick={this.undoLastMove}>Undo</button>
 				<button onClick={this.clearDrawingBoard}>Clear drawing</button>
 				<button onClick={this.onSubmit}>Submit drawing</button>

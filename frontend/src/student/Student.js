@@ -126,7 +126,7 @@ class Student extends Component {
 					<QuizQuestion prompt={this.state.prompt} type={this.state.type} placeholder={this.state.placeholder} handleSubmit={this.submit}></QuizQuestion>
 				</div>
 				<div className="vote-gallery-container">
-					<VoteGallery answers={this.state.answers} onVote={this.vote}/>
+					<VoteGallery prompt={this.state.prompt} type={this.state.type} answers={this.state.answers} onVote={this.vote}/>
 				</div>
 			</div>
 		);
