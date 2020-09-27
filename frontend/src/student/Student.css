@@ -18,6 +18,10 @@
 	display: none;
 }
 
+.student.quiz-not-started .vote-gallery-container {
+	display: none;
+}
+
 .quiz-question {
 	background: #eee;
 	margin-bottom: 64px;

@@ -171,7 +171,7 @@ class Classroom {
 			return;
 		}
 
-		console.log(`${voter} voted ${data.vote} on answer by ${data.student}`);
+		console.log(`${voter} voted ${vote} on answer by ${student}`);
 
 		answer.votes += vote;
 

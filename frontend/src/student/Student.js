@@ -112,7 +112,8 @@ class Student extends Component {
 	};
 
 	vote = (student, vote) => {
-		return this.io.emit('vote submission', {
+		console.log(`Voting ${vote} for ${student}'s answer`);
+		this.io.emit('vote submission', {
 			student,
 			vote
 		});
