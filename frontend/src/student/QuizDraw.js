@@ -17,7 +17,7 @@ class QuizDraw extends Component {
 	}
 
 	onSubmit = (event) => {
-		this.state.hasSubmitted = true;
+		this.setState({ hasSubmitted: true });
 		this.props.onSubmit(this.drawingBoard.getSaveData());
 	}
 
@@ -30,12 +30,12 @@ class QuizDraw extends Component {
 	}
 
 	increaseBrushSize = () => {
-		this.setState({brushRadius: this.state.brushRadius + 2});
+		this.setState({ brushRadius: this.state.brushRadius + 2 });
 	}
 
 	decreaseBrushSize = () => {
 		if (this.state.brushRadius > 3) {
-			this.setState({brushRadius: this.state.brushRadius - 2});
+			this.setState({ brushRadius: this.state.brushRadius - 2 });
 		}
 	}
 

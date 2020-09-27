@@ -22,6 +22,7 @@ class Student extends Component {
 			prompt: "What is 1 + 1?",
 			type: "short-answer",
 			answers: [],
+			hasSubmitted: false,
 		};
 
 		this.setStudentList();
@@ -82,6 +83,7 @@ class Student extends Component {
 				...question,
 				hasQuizStarted: true,
 				answers: [],
+				hasSubmitted: false,
 			});
 
 			let color = colors[(index++) % colors.length];
@@ -91,6 +93,7 @@ class Student extends Component {
 		socket.on('submission end', (data) => {
 			this.setState({
 				answers: data.answers,
+				hasSubmitted: true,
 			});
 		});
 
@@ -111,6 +114,8 @@ class Student extends Component {
 	}
 
 	submit = (answer) => {
+		console.log(`Submitted: ${answer}`)
+		this.setState({ hasSubmitted: true })
 		return this.io.emit('answer submission', {
 			answer,
 			username: this.state.username || 'Anonymous',
@@ -130,9 +135,9 @@ class Student extends Component {
 			<div className={"student " + (this.state.hasQuizStarted ? "quiz-started" : "quiz-not-started")}>
 				<Podium students={this.state.students}></Podium>
 				<div className="quiz-question-container">
-					<QuizQuestion prompt={this.state.prompt} type={this.state.type} placeholder={this.state.placeholder} handleSubmit={this.submit}></QuizQuestion>
+					<QuizQuestion hasSubmitted={this.state.hasSubmitted} prompt={this.state.prompt} type={this.state.type} placeholder={this.state.placeholder} handleSubmit={this.submit}></QuizQuestion>
 				</div>
-				<VoteGallery prompt={this.state.prompt} type={this.state.type} answers={this.state.answers} onVote={this.vote}/>
+				<VoteGallery prompt={this.state.prompt} type={this.state.type} answers={this.state.answers} onVote={this.vote} />
 			</div>
 		);
 	}

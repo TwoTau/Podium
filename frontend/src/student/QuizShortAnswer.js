@@ -16,7 +16,7 @@ class QuizShortAnswer extends Component {
 
 	onSubmit = (event) => {
 		const answer = document.querySelector(".quiz-short-answer input").value;
-		this.state.hasSubmitted = true;
+		this.setState({ hasSubmitted: true });
 		this.props.onClick(answer);
 	}
 
