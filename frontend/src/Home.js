@@ -12,8 +12,8 @@ class Home extends Component {
 	render() {
 		return (
 			<div className="home">
-				<Link to="/teacher" className="home-button">Teacher page</Link>
-				<Link to="/student" className="home-button">Student page</Link>
+				<Link to="/teacher" className="home-button">I am a <span>Teacher</span></Link>
+				<Link to="/student" className="home-button">I am a <span>Student</span></Link>
 			</div>
 		);
 	}

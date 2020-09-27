@@ -14,7 +14,7 @@ class VoteSubmission extends Component {
     }
 
     onVote = (event) => {
-        const answer = document.querySelector("." + this.props.student).value;
+        const answer = document.querySelector("#" + this.props.student).value;
         this.props.onVote(this.props.student, answer);
     }
 

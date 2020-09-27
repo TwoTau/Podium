@@ -9,18 +9,53 @@
 .teacher-nav button {
 	margin-right: 64px;
 	margin-bottom: 64px;
-	padding: 32px;
-	font-size: 32px;
-	background: #ddd;
+	padding: 16px 32px;
+	font-size: 24px;
+	border-radius: 4px;
+	background: #fff;
 	transition: 0.2s;
 }
 
 .teacher-nav button.selected {
-	background: #06e0d5;
+	background: var(--yellow-light);
 }
 
 .information-text h1 {
 	font-size: 32px;
+}
+
+.student-list {
+	font-size: 36px;
+}
+.student-list div {
+	background: #eee;
+	margin-bottom: 32px;
+	width: 50%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	border-radius: 4px;
+}
+
+.student-list span {
+	padding: 32px 64px;
+	display: inline-block;
+}
+.student-list .score {
+	background: rgba(250, 250, 250, 0.2);
+}
+
+.student-list div:nth-child(4n-3), .quiz-list-item:nth-child(4n-3) {
+	background: var(--green-light);
+}
+.student-list div:nth-child(4n-2), .quiz-list-item:nth-child(4n-2) {
+	background: var(--blue-light);
+}
+.student-list div:nth-child(4n-1), .quiz-list-item:nth-child(4n-1) {
+	background: var(--yellow-light);
+}
+.student-list div:nth-child(4n), .quiz-list-item:nth-child(4n) {
+	background: var(--red-light);
 }
 
 .prompt {
@@ -60,15 +95,32 @@
 }
 
 .quiz-list-item {
-	background: #eee;
 	padding: 64px;
+	border-radius: 4px;
 	margin-bottom: 64px;
 }
 
+.quiz-list-item h2 {
+	font-size: 64px;
+}
+
+.quiz-list-item h3 {
+	font-size: 32px;
+	margin-top: 32px;
+	margin-bottom: 32px;
+	opacity: 0.5;
+}
+
 .quiz-list-item button {
-	padding: 32px;
+	padding: 16px 32px;
 	margin-right: 32px;
-	font-size: 16px;
+	font-size: 24px;
+	border-radius: 4px;
+	background: rgba(250, 250, 250, 0.7);
+	transition: 0.2s ease-in-out;
+}
+.quiz-list-item button:hover {
+	background: rgba(250, 250, 250, 1);
 }
 
 .quiz-question-card {
