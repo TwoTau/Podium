@@ -1,21 +1,24 @@
 import React, { Component } from "react";
 import QuizQuestion from "./QuizQuestion";
+import Podium from "./Podium";
 import "./Student.css";
 import { server_endpoint, socket_endpoint } from '../config.json';
 import io from 'socket.io-client';
+import axios from "axios";
 
 class Student extends Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			username: window.prompt("Enter username"),
-			teacher: window.prompt("Enter teacher's username")
+			username: prompt("Enter username"),
+			teacher: prompt("Enter teacher's username"),
+			students: []
 		};
 
-		this.props.onPageSet('student');
+		this.setStudentList();
 
-		this.state.username = prompt('What is your username?') || 'sirknightj';
+		this.props.onPageSet('student');
 
 		this.props.onNameSet(this.state.username);
 
@@ -68,10 +71,21 @@ class Student extends Component {
 		});
 	};
 
+	async setStudentList() {
+		try {
+			const result = await axios.get(server_endpoint + '/students');
+			this.setState({
+				students: result.data.students,
+			});
+		} catch (error) {
+			console.error(error);
+		}
+	}
+
 	render() {
 		return (
 			<div className="student">
-				<QuizQuestion prompt={this.state.prompt} answers={this.state.answers} type={this.state.type} placeholder={this.state.placeholder} handleSubmit={this.submit}></QuizQuestion>
+				<Podium students={this.state.students}/>
 			</div>
 		);
 	}
