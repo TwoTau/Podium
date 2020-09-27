@@ -1,53 +1,45 @@
 {
 	"students": [
 		{
-			"username": "Nicole",
+			"username": "Roy",
 			"score": 6500
 		},
 		{
-			"username": "Ellie",
+			"username": "Byron",
 			"score": 7100
 		},
 		{
-			"username": "Amber",
+			"username": "Vishal",
 			"score": 8100
 		},
 		{
-			"username": "Jasmine",
+			"username": "Jeremy",
 			"score": 6300
 		},
 		{
-			"username": "Molly",
+			"username": "Kevin",
 			"score": 4200
 		},
 		{
-			"username": "Bella",
+			"username": "Aaron",
 			"score": 5000
 		},
 		{
-			"username": "Jake",
+			"username": "Nicole",
 			"score": 4900
 		},
 		{
-			"username": "Joshua",
+			"username": "Jasmine",
 			"score": 8400
 		},
 		{
-			"username": "Harry",
-			"score": 4800
-		},
-		{
-			"username": "Sam",
+			"username": "Ellie",
 			"score": 6700
 		},
 		{
-			"username": "John",
+			"username": "Tiffany",
 			"score": 5100
 		},
-		{
-			"username": "Lewis",
-			"score": 5800
-		}
 	],
 	"teachers": [
 		{
