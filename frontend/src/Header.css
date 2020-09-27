@@ -7,3 +7,15 @@
 	text-transform: uppercase;
 	letter-spacing: 2px;
 }
+
+.is-connected.hide {
+	display: none;
+}
+
+.is-connected.connected {
+	color: green;
+}
+
+.is-connected.disconnected {
+	color: red;
+}

@@ -8,7 +8,8 @@ class App extends Component {
 		super(props);
 		this.state = {
 			page: 'Home',
-			name: null
+			name: null,
+			isConnected: false,
 		};
 	}
 
@@ -19,6 +20,9 @@ class App extends Component {
 		} else {
 			const uppercase = this.state.page[0].toUpperCase() + this.state.page.slice(1);
 			newTitle += uppercase;
+		}
+		if (!this.state.isConnected) {
+			newTitle += ' ❌';
 		}
 		document.getElementsByTagName('title')[0].text = newTitle;
 	}
@@ -32,20 +36,25 @@ class App extends Component {
 	}
 
 	onPageSet = (page) => {
-		this.setState({ page }, () => {
-			this.updateTitle();
-		});
+		this.setState({ page }, this.updateTitle);
 
 		if (page === 'Home') {
 			this.setState({ name: null });
 		}
 	}
 
+	setConnectionStatus = (isConnected) => {
+		this.setState({
+			isConnected,
+		}, this.updateTitle);
+		console.log(`isConnected = ${isConnected}`);
+	}
+
 	render() {
 		return (
 			<div className="App">
-				<Header name={this.state.name} page={this.state.page}></Header>
-				<Main onNameSet={this.onNameSet} onPageSet={this.onPageSet}></Main>
+				<Header name={this.state.name} page={this.state.page} isConnected={this.state.isConnected}></Header>
+				<Main onNameSet={this.onNameSet} onPageSet={this.onPageSet} setConnectionStatus={this.setConnectionStatus}></Main>
 			</div>
 		);
 	}

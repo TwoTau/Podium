@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 /**
  * Props
- * - quizes: all quizes under this teacher
+ * - quizzes: all quizzes under this teacher
  * - submitQuiz: submit a quiz to be saved to db, sets created time, and exit current page
  * - name?: string, will be non-null if editing a quiz
  */
@@ -14,11 +14,11 @@ class CreateQuiz extends Component
         let quiz = {
             questions: [],
         };
-        if (this.props.name) {
-            for (const q of this.props.quizes) {
-                if (q.name === this.props.name) {
-                    quiz = q;
-                }
+        this.takenNames = new Set();
+        for (const q of this.props.quizzes) {
+            this.takenNames.add(q.name);
+            if (q.name === this.props.name) {
+                quiz = q;
             }
         }
         this.state = {
