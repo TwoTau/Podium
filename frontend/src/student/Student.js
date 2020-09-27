@@ -1,24 +1,24 @@
 import React, { Component } from "react";
 import QuizQuestion from "./QuizQuestion";
-import Podium from "./Podium";
 import "./Student.css";
 import { server_endpoint, socket_endpoint } from '../config.json';
 import io from 'socket.io-client';
-import axios from "axios";
 
 class Student extends Component {
 	constructor(props) {
 		super(props);
 
+		// For testing purposes. Delete later.
 		this.state = {
-			username: prompt("Enter username"),
-			teacher: prompt("Enter teacher's username"),
-			students: []
+			username: 'sirknightj',
+			prompt: "What is 1 + 1?",
+			type: "multiple-choice",
+			answers: ["1 Lorem Ipsum is simply dummy text of the printing and typesetting industry", "2", "3", "4"],
 		};
 
-		this.setStudentList();
-
 		this.props.onPageSet('student');
+
+		this.state.username = prompt('What is your username?') || 'sirknightj';
 
 		this.props.onNameSet(this.state.username);
 
@@ -26,11 +26,6 @@ class Student extends Component {
 		const socket = io(socket_endpoint, { autoConnect: true });
 
 		this.io = socket;
-
-		socket.emit("new student", {
-			username: this.state.username,
-			teacher: this.state.teacher
-		});
 
 		socket.on("connect", () => {
 			this.props.setConnectionStatus(true);
@@ -54,6 +49,7 @@ class Student extends Component {
 		socket.on('invalid teacher', () => {
 			alert('The teacher name is invalid. The teacher must be logged in first. Refresh to try again with a different teacher, or later.');
 		});
+
 		socket.on('invalid username', () => {
 			alert('That username is already in use with this teacher. Refresh to try with a different username.');
 		});
@@ -62,6 +58,14 @@ class Student extends Component {
 			console.log(`Your connection to the server has been lost: ${reason}.`);
 			this.props.setConnectionStatus(false);
 		});
+
+		socket.on("new question", (question) => {
+			this.setState({ ...question });
+		});
+
+		socket.on("quiz end", () => {
+			alert('Quiz has ended!');
+		})
 	}
 
 	submit = (answer) => {
@@ -71,21 +75,12 @@ class Student extends Component {
 		});
 	};
 
-	async setStudentList() {
-		try {
-			const result = await axios.get(server_endpoint + '/students');
-			this.setState({
-				students: result.data.students,
-			});
-		} catch (error) {
-			console.error(error);
-		}
-	}
-
 	render() {
 		return (
 			<div className="student">
-				<Podium students={this.state.students}/>
+				<div>
+					<QuizQuestion prompt={this.state.prompt} answers={this.state.answers} type={this.state.type} placeholder={this.state.placeholder} handleSubmit={this.submit}></QuizQuestion>
+				</div>
 			</div>
 		);
 	}

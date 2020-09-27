@@ -30,6 +30,10 @@ class TeacherQuizView extends Component {
         ))
     }
 
+    handleNextQuestion = () => {
+        this.props.onNextQuestion();
+    }
+
     render() {
         return (
             <div>
@@ -40,6 +44,9 @@ class TeacherQuizView extends Component {
                         </div>
                         <div className="student-answers-container">
                             {this.getAnswers()}
+                        </div>
+                        <div>
+                            <button onClick={this.handleNextQuestion}>Next</button>
                         </div>
                     </div>
                 </div>

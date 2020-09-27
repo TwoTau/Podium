@@ -33,11 +33,17 @@ class Classroom {
 			this.startQuiz(data.quizName);
 		});
 
-		socket.on('next question', this.nextQuestion);
+		socket.on('next question', () => {
+			this.nextQuestion()
+		});
 
-		socket.on('end submission', this.endSubmission);
+		socket.on('end submission', () => {
+			this.endSubmission()
+		});
 
-		socket.on('end quiz', this.endQuiz);
+		socket.on('end quiz', () => {
+			this.endQuiz()
+		});
 	}
 
 	addStudent(socket, username) {
@@ -81,7 +87,7 @@ class Classroom {
 	}
 
 	startQuiz(quizName) {
-		const quiz = db
+		const quiz = this.db
 			.get('quizzes')
 			.find({ name: quizName })
 			.value();
