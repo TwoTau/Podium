@@ -40,8 +40,8 @@ class QuizDraw extends Component {
 		return (
 			<div className="quiz-short-answer">
 				<DrawingBoard ref={drawingBoard => this.drawingBoard = drawingBoard} canvasWidth={400} canvasHeight={400} brushRadius={this.state.brushRadius}/>
-				<button onClick={this.increaseBrushSize}>+</button>
 				<button onClick={this.decreaseBrushSize}>-</button>
+				<button onClick={this.increaseBrushSize}>+</button>
 				<button onClick={this.undoLastMove}>Undo</button>
 				<button onClick={this.clearDrawingBoard}>Clear drawing</button>
 				<button onClick={this.onSubmit}>Submit drawing</button>
