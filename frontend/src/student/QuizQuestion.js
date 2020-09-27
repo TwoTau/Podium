@@ -14,7 +14,7 @@ class QuizQuestion extends Component {
 			// HACK: prompt prop is used for clearing the input
 			return <QuizShortAnswer hasSubmitted={this.props.hasSubmitted} prompt={this.props.prompt} placeholder={this.props.placeholder} onClick={this.onAnswerSelected}></QuizShortAnswer>;
 		} else if (type === 'draw') {
-			return <QuizDraw hasSubmitted={this.props.hasSubmitted} onSubmit={this.onAnswerSelected}></QuizDraw>
+			return <QuizDraw hasSubmitted={this.props.hasSubmitted} prompt={this.props.prompt} onSubmit={this.onAnswerSelected}></QuizDraw>
 		}
 		console.error(`Unknown question type ${type}`);
 		return null;

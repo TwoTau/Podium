@@ -3,6 +3,7 @@ import DrawingBoard from "react-canvas-draw";
 
 /**
  * Props:
+ * - prompt: string, used to detect when to clear the board
  * - hasSubmitted: boolean
  * - onSubmit: function
  */
@@ -12,6 +13,12 @@ class QuizDraw extends Component {
 
 		this.state = {
 			brushRadius: 5,
+		}
+	}
+
+	componentDidUpdate(prevProps) {
+		if (this.props.prompt !== prevProps.prompt) {
+			this.clearDrawingBoard();
 		}
 	}
 
