@@ -5,26 +5,21 @@ import QuizShortAnswer from "./QuizShortAnswer";
 class QuizQuestion extends Component {
 	constructor(props) {
 		super(props);
-
-		this.state = {
-			hasSubmitted: this.props.hasSubmitted,
-		}
 	}
 
 	getInner = () => {
 		const type = this.props.type;
 
 		if (type === 'short-answer') {
-			return <QuizShortAnswer hasSubmitted={this.state.hasSubmitted} placeholder={this.props.placeholder} onClick={this.onAnswerSelected}></QuizShortAnswer>;
+			return <QuizShortAnswer hasSubmitted={this.props.hasSubmitted} placeholder={this.props.placeholder} onClick={this.onAnswerSelected}></QuizShortAnswer>;
 		} else if (type === 'draw') {
-			return <QuizDraw hasSubmitted={this.state.hasSubmitted} onSubmit={this.onAnswerSelected}></QuizDraw>
+			return <QuizDraw hasSubmitted={this.props.hasSubmitted} onSubmit={this.onAnswerSelected}></QuizDraw>
 		}
 		console.error(`Unknown question type ${type}`);
 		return null;
 	}
 
 	onAnswerSelected = (answerChoice) => {
-		this.setState({ hasSubmitted: true });
 		this.props.handleSubmit(answerChoice);
 	}
 

@@ -11,13 +11,11 @@ class QuizDraw extends Component {
 		super(props);
 
 		this.state = {
-			hasSubmitted: this.props.hasSubmitted,
 			brushRadius: 12,
 		}
 	}
 
 	onSubmit = (event) => {
-		this.setState({ hasSubmitted: true });
 		this.props.onSubmit(this.drawingBoard.getSaveData());
 	}
 
@@ -43,11 +41,11 @@ class QuizDraw extends Component {
 		return (
 			<div className="quiz-draw">
 				<DrawingBoard ref={drawingBoard => this.drawingBoard = drawingBoard} canvasWidth={400} canvasHeight={400} brushRadius={this.state.brushRadius}/>
-				<button className="brush-size-change" disabled={this.state.hasSubmitted} onClick={this.decreaseBrushSize}>-</button>
-				<button className="brush-size-change" disabled={this.state.hasSubmitted} onClick={this.increaseBrushSize}>+</button>
-				<button disabled={this.state.hasSubmitted} onClick={this.undoLastMove}>Undo</button>
-				<button disabled={this.state.hasSubmitted} onClick={this.clearDrawingBoard}>Clear drawing</button>
-				<button className="submit-drawing" disabled={this.state.hasSubmitted} onClick={this.onSubmit}>Submit drawing</button>
+				<button className="brush-size-change" disabled={this.props.hasSubmitted} onClick={this.decreaseBrushSize}>-</button>
+				<button className="brush-size-change" disabled={this.props.hasSubmitted} onClick={this.increaseBrushSize}>+</button>
+				<button disabled={this.props.hasSubmitted} onClick={this.undoLastMove}>Undo</button>
+				<button disabled={this.props.hasSubmitted} onClick={this.clearDrawingBoard}>Clear drawing</button>
+				<button className="submit-drawing" disabled={this.props.hasSubmitted} onClick={this.onSubmit}>Submit drawing</button>
 			</div>
 		);
 	}

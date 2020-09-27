@@ -115,7 +115,7 @@ class Student extends Component {
 
 	submit = (answer) => {
 		console.log(`Submitted: ${answer}`)
-		this.setState({ hasSubmitted: true })
+		this.setState({ hasSubmitted: true });
 		return this.io.emit('answer submission', {
 			answer,
 			username: this.state.username || 'Anonymous',
