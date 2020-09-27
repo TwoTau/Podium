@@ -17,7 +17,7 @@ class QuizDraw extends Component {
 	}
 
 	onSubmit = (event) => {
-		this.state.hasSubmitted = true;
+		this.setState({ hasSubmitted: true });
 		this.props.onSubmit(this.drawingBoard.getSaveData());
 	}
 
@@ -30,19 +30,19 @@ class QuizDraw extends Component {
 	}
 
 	increaseBrushSize = () => {
-		this.setState({brushRadius: this.state.brushRadius + 2});
+		this.setState({ brushRadius: this.state.brushRadius + 2 });
 	}
 
 	decreaseBrushSize = () => {
 		if (this.state.brushRadius > 3) {
-			this.setState({brushRadius: this.state.brushRadius - 2});
+			this.setState({ brushRadius: this.state.brushRadius - 2 });
 		}
 	}
 
 	render() {
 		return (
 			<div className="quiz-short-answer">
-				<DrawingBoard ref={drawingBoard => this.drawingBoard = drawingBoard} canvasWidth={400} canvasHeight={400} brushRadius={this.state.brushRadius}/>
+				<DrawingBoard ref={drawingBoard => this.drawingBoard = drawingBoard} canvasWidth={400} canvasHeight={400} brushRadius={this.state.brushRadius} />
 				<button disabled={this.state.hasSubmitted} onClick={this.decreaseBrushSize}>-</button>
 				<button disabled={this.state.hasSubmitted} onClick={this.increaseBrushSize}>+</button>
 				<button disabled={this.state.hasSubmitted} onClick={this.undoLastMove}>Undo</button>

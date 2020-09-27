@@ -7,7 +7,7 @@ class QuizQuestion extends Component {
 		super(props);
 
 		this.state = {
-			hasSubmitted: false,
+			hasSubmitted: this.props.hasSubmitted,
 		}
 	}
 
@@ -24,7 +24,7 @@ class QuizQuestion extends Component {
 	}
 
 	onAnswerSelected = (answerChoice) => {
-		this.state.hasSubmitted = true;
+		this.setState({ hasSubmitted: true });
 		this.props.handleSubmit(answerChoice);
 	}
 

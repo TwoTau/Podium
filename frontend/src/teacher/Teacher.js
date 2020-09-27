@@ -180,6 +180,7 @@ class Teacher extends Component {
 	}
 
 	onQuizEnd = () => {
+		this.viewQuizList();
 		this.io.emit('end quiz');
 	}
 
@@ -194,7 +195,7 @@ class Teacher extends Component {
 	render() {
 		return (
 			<div className="teacher">
-				<div className="teacher-nav">
+				<div className={this.state.contentType === this.contentStates.QUIZ_IN_SESSION ? 'hide' : 'teacher-nav'}>
 					<button onClick={this.viewAllStudentsList} className={this.state.contentType === this.contentStates.STUDENT_LIST ? 'selected' : ''}>View All Students</button>
 					<button onClick={this.viewQuizList} className={this.state.contentType === this.contentStates.QUIZ_LIST ? 'selected' : ''}>Quiz List</button>
 					<button onClick={this.viewCreateQuiz} className={this.state.contentType === this.contentStates.CREATE_QUIZ ? 'selected' : ''}>Create Quiz</button>
