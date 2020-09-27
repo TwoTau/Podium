@@ -8,12 +8,9 @@ class Student extends Component {
 	constructor(props) {
 		super(props);
 
-		// For testing purposes. Delete later.
 		this.state = {
-			username: 'sirknightj',
-			prompt: "What is 1 + 1?",
-			type: "multiple-choice",
-			answers: ["1 Lorem Ipsum is simply dummy text of the printing and typesetting industry", "2", "3", "4"],
+			username: window.prompt("Enter username"),
+			teacher: window.prompt("Enter teacher's username")
 		};
 
 		this.props.onPageSet('student');
@@ -23,6 +20,11 @@ class Student extends Component {
 		const socket = io(socket_endpoint, { autoConnect: true });
 
 		this.io = socket;
+
+		socket.emit("new student", {
+			username: this.state.username,
+			teacher: this.state.teacher
+		});
 
 		socket.on("connect", () => {
 			this.io.emit('new student', {
@@ -49,7 +51,6 @@ class Student extends Component {
 	}
 
 	submit = (answer) => {
-		console.log(this.state) // TODO: Delete this line later.
 		return this.io.emit('answer submission', {
 			answer,
 			username: this.state.username || 'Anonymous',

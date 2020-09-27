@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 /**
  * Props:
- * - mode: 'read' or 'edit'
+ *
  */
 class QuizQuestionCard extends Component {
     constructor(props) {
