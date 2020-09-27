@@ -22,13 +22,15 @@ class Teacher extends Component {
 			username: 'mrs-teacher-name', // TODO
 			contentType: this.contentStates.STUDENT_LIST,
 			quizzes: [],
-			students: [],
+			allStudents: [],
+			students: [], // list of strings (usernames)
+			studentsAnswered: [], // list of strings (usernames)
 			prompt: null,
 			questionType: null,
 			placeholder: null,
 		};
 
-		this.setStudentList();
+		this.setAllStudentsList();
 		this.setQuizzesList();
 
 		this.props.onPageSet('teacher');
@@ -70,13 +72,19 @@ class Teacher extends Component {
 				placeholder: data.placeholder,
 			});
 		});
+
+		socket.on("new answer", (data) => {
+			this.setState((state) => ({
+				studentsAnswered: [...state.studentsAnswered, data.student],
+			}));
+		});
 	}
 
-	async setStudentList() {
+	async setAllStudentsList() {
 		try {
 			const result = await axios.get(server_endpoint + '/students');
 			this.setState({
-				students: result.data.students,
+				allStudents: result.data.students,
 			});
 		} catch (error) {
 			console.error(error);
@@ -98,7 +106,7 @@ class Teacher extends Component {
 		}
 	}
 
-	viewStudentList = () => {
+	viewAllStudentsList = () => {
 		this.setState({
 			contentType: this.contentStates.STUDENT_LIST,
 		});
@@ -157,6 +165,9 @@ class Teacher extends Component {
 	}
 
 	onNextQuestion = () => {
+		this.setState({
+			studentsAnswered: [],
+		});
 		this.io.emit('next question');
 	}
 
@@ -171,11 +182,11 @@ class Teacher extends Component {
 	}
 
 	getUnanswered = () => {
-		// TODO: return the list of students that have not answered yet
+		return this.state.students.filter((s) => !this.state.studentsAnswered.includes(s));
 	}
 
 	getAnswered = () => {
-		// TODO: return the list of students that have answered
+		return this.state.studentsAnswered;
 	}
 
 	getAnswers = () => {
@@ -186,13 +197,13 @@ class Teacher extends Component {
 		return (
 			<div className="teacher">
 				<div className="teacher-nav">
-					<button onClick={this.viewStudentList} className={this.state.contentType === this.contentStates.STUDENT_LIST ? 'selected' : ''}>View Student List</button>
+					<button onClick={this.viewAllStudentsList} className={this.state.contentType === this.contentStates.STUDENT_LIST ? 'selected' : ''}>View All Students</button>
 					<button onClick={this.viewQuizList} className={this.state.contentType === this.contentStates.QUIZ_LIST ? 'selected' : ''}>Quiz List</button>
 					<button onClick={this.viewCreateQuiz} className={this.state.contentType === this.contentStates.CREATE_QUIZ ? 'selected' : ''}>Create Quiz</button>
 				</div>
 				<div>{this.state.content}</div>
 				<div className={this.state.contentType === this.contentStates.STUDENT_LIST ? 'show' : 'hide'}>
-					<StudentList students={this.state.students} />
+					<StudentList students={this.state.allStudents} />
 				</div>
 				<div className={this.state.contentType === this.contentStates.QUIZ_LIST ? 'show' : 'hide'}>
 					<QuizList quizzes={this.state.quizzes} onQuizStart={this.onQuizStart} onQuizEdit={this.onQuizEdit} />

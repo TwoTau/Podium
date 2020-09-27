@@ -19,20 +19,20 @@ class TeacherQuizView extends Component {
     }
 
     getAnswers = () => {
-        return this.props.answers.map(answer => (
-            <p>answer</p>
+        return this.props.answers.map((answer) => (
+            <p key={answer}>{answer}</p>
         ));
     }
 
     getUnanswered = () => {
-        return this.props.unanswered.map(student => (
-            <p>{student.username || 'Anonymous'}</p>
+        return this.props.unanswered.map((student) => (
+            <p key={student}>{student}</p>
         ));
     }
 
     getAnswered = () => {
-        return this.props.answered.map(student => (
-            <p>{student.username || 'Anonymous'}</p>
+        return this.props.answered.map((student) => (
+            <p key={student}>{student}</p>
         ));
     }
 
