@@ -8,17 +8,34 @@ import React, { Component } from "react";
 class QuizShortAnswer extends Component {
 	constructor(props) {
 		super(props);
+
+		this.state = {
+			value: '',
+		};
+	}
+
+	componentDidUpdate(prevProps) {
+		if (this.props.prompt !== prevProps.prompt) {
+			this.setState({
+				value: '',
+			});
+		}
 	}
 
 	onSubmit = (event) => {
-		const answer = document.querySelector(".quiz-short-answer input").value;
-		this.props.onClick(answer);
+		this.props.onClick(this.state.value);
+	}
+
+	onChange = (event) => {
+		this.setState({
+			value: event.target.value,
+		});
 	}
 
 	render() {
 		return (
 			<div className="quiz-short-answer">
-				<input disabled={this.props.hasSubmitted} ref={input => this.answerInput = input} type="text" placeholder={this.props.placeholder || 'no-placeholder'} />
+				<input disabled={this.props.hasSubmitted} ref={input => this.answerInput = input} type="text" placeholder={this.props.placeholder || 'no-placeholder'} value={this.state.value} onChange={this.onChange} />
 				<button disabled={this.props.hasSubmitted} ref={button => this.submitButton = button} onClick={this.onSubmit}>Submit</button>
 			</div>
 		);

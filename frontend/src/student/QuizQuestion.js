@@ -11,7 +11,8 @@ class QuizQuestion extends Component {
 		const type = this.props.type;
 
 		if (type === 'short-answer') {
-			return <QuizShortAnswer hasSubmitted={this.props.hasSubmitted} placeholder={this.props.placeholder} onClick={this.onAnswerSelected}></QuizShortAnswer>;
+			// HACK: prompt prop is used for clearing the input
+			return <QuizShortAnswer hasSubmitted={this.props.hasSubmitted} prompt={this.props.prompt} placeholder={this.props.placeholder} onClick={this.onAnswerSelected}></QuizShortAnswer>;
 		} else if (type === 'draw') {
 			return <QuizDraw hasSubmitted={this.props.hasSubmitted} onSubmit={this.onAnswerSelected}></QuizDraw>
 		}

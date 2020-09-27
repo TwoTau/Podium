@@ -34,7 +34,8 @@
 .student-list div {
 	background: #eee;
 	margin-bottom: 32px;
-	width: 50%;
+	width: 100%;
+	max-width: 700px;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
