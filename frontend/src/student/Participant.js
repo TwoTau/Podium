@@ -41,7 +41,7 @@ class Participant extends Component {
             <div className={"participant"}>
                 <div className={"participant-name"}>
                     <h3 style={this.getStyle()}>
-                        {this.props.rank + " " + this.props.name}
+                        {this.props.rank + ". " + this.props.name}
                     </h3>
                 </div>
                 <div className={"participant-score"}>

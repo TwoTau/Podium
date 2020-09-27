@@ -14,7 +14,7 @@ class Header extends Component {
 		}
 		return (
 			<div className="header">
-				<h1><Link to="/">Pollodium</Link> {title}</h1>
+				<h1 className="title"><Link to="/">Pollodium</Link> <span>{title}</span></h1>
 				<h1 className={"is-connected " + (this.props.page === 'Home' ? 'hide' : 'show') + (this.props.isConnected ? ' connected' : ' disconnected')}>{this.props.isConnected ? 'Connected' : 'Disconnected'}</h1>
 				<div className={"disconnected-banner" + ((this.props.isConnected || this.props.page === 'Home') ? " hide" : "")}>
 					<h1>DISCONNECTED</h1>

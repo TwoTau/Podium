@@ -50,7 +50,7 @@
 
 .student-list .score {
 	background: rgba(250, 250, 250, 0.2);
-	width: 150px;
+	width: 200px;
 	text-align: center;
 }
 
@@ -155,6 +155,11 @@
 
 .student-answers-container {
 	font-size: 12px;
+}
+
+.no-submissions-yet {
+	font-size: 32px;
+	opacity: 0.3;
 }
 
 .quiz-create button:hover {

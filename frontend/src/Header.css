@@ -3,13 +3,22 @@
 	padding: 32px 64px;
 }
 
-.header h1 {
+.header .title a {
 	text-transform: uppercase;
 	letter-spacing: 2px;
+	text-decoration: none;
 }
 
-.header a {
-	text-decoration: none;
+.header .title span {
+	font-weight: normal;
+}
+
+.header .title {
+	float: left;
+}
+.is-connected {
+	float: right;
+	font-weight: normal;
 }
 
 .is-connected.hide {

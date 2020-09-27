@@ -119,10 +119,16 @@
 }
 
 .podium {
-	padding: 32px;
+	padding: 64px;
+	margin: 0 auto;
 	margin-bottom: 32px;
-	background: #ddd;
+	background: #fff;
 	max-width: 700px;
+}
+
+.podium-title {
+	font-size: 48px;
+	margin-bottom: 64px;
 }
 
 .participant {
