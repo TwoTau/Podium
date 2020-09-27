@@ -13,6 +13,7 @@ class Teacher extends Component {
 		STUDENT_LIST: 'StudentList',
 		QUIZ_LIST: 'QuizList',
 		CREATE_QUIZ: 'CreateQuiz',
+		QUIZ_IN_SESSION: 'QuizInSession',
 	}
 
 	constructor(props) {
@@ -53,6 +54,10 @@ class Teacher extends Component {
 			console.log(`Your connection to the server has been lost: ${reason}.`);
 			this.props.setConnectionStatus(false);
 		});
+
+		socket.on("user update", (students) => {
+			this.setState({students: students});
+		})
 	}
 
 	async setStudentList() {
@@ -105,6 +110,10 @@ class Teacher extends Component {
 		this.io.emit('start quiz', {
 			quizName,
 		});
+
+		this.setState({
+			contentType: this.contentStates.QUIZ_IN_SESSION,
+		})
 	}
 
 	onQuizEdit = (quizName) => {
@@ -135,6 +144,20 @@ class Teacher extends Component {
 		}
 	}
 
+	onNextQuestion = () => {
+		alert('Event: "next question" emitted'); // TODO: Delete this later
+		this.io.emit('next question');
+	}
+
+	onEndSubmission = () => {
+		alert('Event: "end submission" emitted'); // TODO: Delete this later
+		this.io.emit('end submission');
+	}
+
+	onQuizEnd = () => {
+		alert('Event: "end quiz" emitted'); // TODO: Delete this later
+		this.io.emit('end quiz');
+	}
 
 	getUnanswered = () => {
 		// TODO: return the list of students that have not answered yet
@@ -166,8 +189,15 @@ class Teacher extends Component {
 				<div className={this.state.contentType === this.contentStates.CREATE_QUIZ ? 'show' : 'hide'}>
 					<CreateQuiz quizzes={this.state.quizzes} submitQuiz={this.onQuizSubmit} name={this.state.editQuizName} />
 				</div>
-				<div className='show'>
-					<QuizView unanswered={this.getUnanswered() || []} answered={this.getAnswered() || []} answers={this.getAnswers() || []}></QuizView>
+				<div className={this.state.contentType === this.contentStates.QUIZ_IN_SESSION ? 'show' : 'hide'}>
+					<QuizView
+						unanswered={this.getUnanswered() || []}
+						answered={this.getAnswered() || []}
+						answers={this.getAnswers() || []}
+						onNextQuestion={this.onNextQuestion}
+						onEndSubmission={this.onEndSubmission}
+						onQuizEnd={this.onQuizEnd}>
+					</QuizView>
 				</div>
 			</div>
 		);

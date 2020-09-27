@@ -49,6 +49,7 @@ class Student extends Component {
 		socket.on('invalid teacher', () => {
 			alert('The teacher name is invalid. The teacher must be logged in first. Refresh to try again with a different teacher, or later.');
 		});
+
 		socket.on('invalid username', () => {
 			alert('That username is already in use with this teacher. Refresh to try with a different username.');
 		});
@@ -58,8 +59,12 @@ class Student extends Component {
 			this.props.setConnectionStatus(false);
 		});
 
-		socket.on("quiz end", () => {
+		socket.on("new question", (question) => {
+			this.setState({ ...question });
+		});
 
+		socket.on("quiz end", () => {
+			alert('Quiz has ended!');
 		})
 	}
 
