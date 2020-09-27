@@ -48,6 +48,8 @@
 
 .student-list .score {
 	background: rgba(250, 250, 250, 0.2);
+	width: 150px;
+	text-align: center;
 }
 
 .student-list div:nth-child(4n-3), .quiz-list-item:nth-child(4n-3) {

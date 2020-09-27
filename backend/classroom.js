@@ -60,6 +60,8 @@ class Classroom {
 			socket.emit('new question', this.quiz.questions[this.currQuestion]);
 		}
 
+		this.addStudentToDb(username);
+
 		socket.on('disconnect', () => {
 			const index = this.students.indexOf(socket);
 			if (index > -1) {
@@ -175,9 +177,40 @@ class Classroom {
 
 		answer.votes += vote;
 
+		this.updateStudentScoreBy(student, vote);
+
 		this.sendAll('question vote', {
 			answers: this.answers,
 		});
+	}
+
+	updateStudentScoreBy(student, deltaScore) {
+		this.db
+			.get('students')
+			.find({
+				username: student
+			})
+			.update('score', n => n += deltaScore)
+			.write();
+	}
+
+	addStudentToDb(student) {
+		const value = this.db
+			.get('students')
+			.find({ username: student })
+			.value();
+
+		if (value) { // already exists
+			return;
+		}
+
+		this.db
+			.get('students')
+			.push({
+				username: student,
+				score: 0,
+			})
+			.write();
 	}
 }
 
