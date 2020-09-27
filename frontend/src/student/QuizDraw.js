@@ -11,7 +11,7 @@ class QuizDraw extends Component {
 		super(props);
 
 		this.state = {
-			brushRadius: 12,
+			brushRadius: 5,
 		}
 	}
 
@@ -32,15 +32,15 @@ class QuizDraw extends Component {
 	}
 
 	decreaseBrushSize = () => {
-		if (this.state.brushRadius > 3) {
+		if (this.state.brushRadius >= 3) {
 			this.setState({ brushRadius: this.state.brushRadius - 2 });
 		}
 	}
 
 	render() {
 		return (
-			<div className="quiz-draw">s
-				<DrawingBoard ref={drawingBoard => this.drawingBoard = drawingBoard} canvasWidth={600} canvasHeight={400} brushRadius={this.state.brushRadius}/>
+			<div className="quiz-draw">
+				<DrawingBoard lazyRadius={0} disabled={this.props.hasSubmitted} ref={drawingBoard => this.drawingBoard = drawingBoard} canvasWidth={600} canvasHeight={400} brushRadius={this.state.brushRadius}/>
 				<button className="brush-size-change" disabled={this.props.hasSubmitted} onClick={this.decreaseBrushSize}>-</button>
 				<button className="brush-size-change" disabled={this.props.hasSubmitted} onClick={this.increaseBrushSize}>+</button>
 				<button disabled={this.props.hasSubmitted} onClick={this.undoLastMove}>Undo</button>
