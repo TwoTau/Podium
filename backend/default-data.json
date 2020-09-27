@@ -39,11 +39,11 @@
 		{
 			"username": "Tiffany",
 			"score": 5100
-		},
+		}
 	],
 	"teachers": [
 		{
-			"username": "mrs-teacher-name",
+			"username": "Mrs. Anderson",
 			"quizzes": [
 				"geography quiz",
 				"biology quiz",
