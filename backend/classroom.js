@@ -81,7 +81,7 @@ class Classroom {
 	}
 
 	startQuiz(quizName) {
-		const quiz = db
+		const quiz = this.db
 			.get('quizzes')
 			.find({ name: quizName })
 			.value();
