@@ -4,6 +4,7 @@ import "./Student.css";
 import { server_endpoint, socket_endpoint } from '../config.json';
 import io from 'socket.io-client';
 import Podium from "./Podium";
+import VoteGallery from "./VoteGallery";
 import axios from "axios";
 
 class Student extends Component {
@@ -102,6 +103,13 @@ class Student extends Component {
 			username: this.state.username || 'Anonymous',
 		});
 	};
+
+	vote = (student, vote) => {
+		return this.io.emit('vote submission', {
+			student,
+			vote
+		});
+	}
 
 	render() {
 		return (

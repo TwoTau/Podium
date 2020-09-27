@@ -10,11 +10,12 @@ class VoteGallery extends Component {
         super(props);
     }
 
+
     render() {
         return (
             <div className={"vote-gallery"}>
                 {this.props.answers.map(s => (
-                    <VoteSubmission key={s.student} student={s.student} answer={s.answer}/>
+                    <VoteSubmission key={s.student} student={s.student} answer={s.answer} onChange={this.props.onVote}/>
                 ))}
             </div>
         );

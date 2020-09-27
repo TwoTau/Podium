@@ -9,6 +9,10 @@ class VoteSubmission extends Component {
     constructor(props) {
         super(props);
     }
+    onVote = (event) => {
+        const answer = document.querySelector("." + this.props.student).value;
+        this.props.onVote(this.props.student, answer);
+    }
 
     render() {
         return (
@@ -16,7 +20,7 @@ class VoteSubmission extends Component {
                 <p>{this.props.answer}</p>
                 <div>
                     <label>👎</label>
-                    <input type="range" min="-1" max="1"/>
+                    <input type="range" min="-1" max="1" id={this.props.student} onChange={this.onVote}/>
                     <label>👍</label>
                 </div>
             </div>
