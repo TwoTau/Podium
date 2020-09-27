@@ -25,6 +25,7 @@ class Teacher extends Component {
 			allStudents: [],
 			students: [], // list of strings (usernames)
 			studentsAnswered: [], // list of strings (usernames)
+			answers: [],
 			prompt: null,
 			questionType: null,
 			placeholder: null,
@@ -74,8 +75,10 @@ class Teacher extends Component {
 		});
 
 		socket.on("new answer", (data) => {
+			let { student, answer } = data;
 			this.setState((state) => ({
-				studentsAnswered: [...state.studentsAnswered, data.student],
+				studentsAnswered: [...state.studentsAnswered, student],
+				answers: [...state.answers, answer],
 			}));
 		});
 	}
@@ -167,6 +170,7 @@ class Teacher extends Component {
 	onNextQuestion = () => {
 		this.setState({
 			studentsAnswered: [],
+			answers: [],
 		});
 		this.io.emit('next question');
 	}
@@ -216,7 +220,7 @@ class Teacher extends Component {
 						prompt={this.state.prompt}
 						unanswered={this.getUnanswered() || []}
 						answered={this.getAnswered() || []}
-						answers={this.getAnswers() || []}
+						answers={this.state.answers}
 						onNextQuestion={this.onNextQuestion}
 						onEndSubmission={this.onEndSubmission}
 						onQuizEnd={this.onQuizEnd}>

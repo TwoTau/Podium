@@ -4,6 +4,7 @@ import "./Student.css";
 import { server_endpoint, socket_endpoint } from '../config.json';
 import io from 'socket.io-client';
 import Podium from "./Podium";
+import VoteGallery from "./VoteGallery";
 import axios from "axios";
 
 class Student extends Component {
@@ -17,6 +18,7 @@ class Student extends Component {
 			username: 'sirknightj',
 			prompt: "What is 1 + 1?",
 			type: "short-answer",
+			answers: [],
 		};
 
 		this.setStudentList();
@@ -45,7 +47,6 @@ class Student extends Component {
 			console.log(questionData);
 			this.setState({
 				prompt: questionData.prompt,
-				answers: questionData.answers,
 				placeholder: questionData.placeholder,
 				type: questionData.type,
 			});
@@ -77,6 +78,13 @@ class Student extends Component {
 			this.setState({
 				...question,
 				hasQuizStarted: true,
+				answers: [],
+			});
+		});
+
+		socket.on('submission end', (data) => {
+			this.setState({
+				answers: data.answers,
 			});
 		});
 
@@ -103,12 +111,19 @@ class Student extends Component {
 		});
 	};
 
+	vote = (student, vote) => {
+		return this.io.emit('vote submission', {
+			student,
+			vote
+		});
+	}
+
 	render() {
 		return (
 			<div className={"student " + (this.state.hasQuizStarted ? "quiz-started" : "quiz-not-started")}>
 				<Podium students={this.state.students}></Podium>
 				<div className="quiz-question-container">
-					<QuizQuestion prompt={this.state.prompt} answers={this.state.answers} type={this.state.type} placeholder={this.state.placeholder} handleSubmit={this.submit}></QuizQuestion>
+					<QuizQuestion prompt={this.state.prompt} type={this.state.type} placeholder={this.state.placeholder} handleSubmit={this.submit}></QuizQuestion>
 				</div>
 			</div>
 		);
