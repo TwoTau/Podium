@@ -27,7 +27,7 @@ class VoteSubmission extends Component {
 
     getAnswer = () => {
         if (this.props.type === 'draw') {
-            return (<CanvasDraw disabled hideGrid saveData={this.props.answer} canvasHeight={400} canvasWidth={400} />)
+            return (<CanvasDraw disabled hideGrid saveData={this.props.answer} canvasHeight={400} canvasWidth={600} />)
         } else {
             return (<p>Answer: {this.props.answer}</p>);
         }
