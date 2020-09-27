@@ -38,14 +38,15 @@ class QuizDraw extends Component {
 	}
 
 	render() {
+		let submitText = this.props.hasSubmitted ? 'Submitted!' : 'Submit drawing';
 		return (
 			<div className="quiz-draw">
-				<DrawingBoard lazyRadius={0} disabled={this.props.hasSubmitted} ref={drawingBoard => this.drawingBoard = drawingBoard} canvasWidth={600} canvasHeight={400} brushRadius={this.state.brushRadius}/>
+				<DrawingBoard lazyRadius={0} disabled={this.props.hasSubmitted} ref={drawingBoard => this.drawingBoard = drawingBoard} canvasWidth={600} canvasHeight={400} brushRadius={this.state.brushRadius} />
 				<button className="brush-size-change" disabled={this.props.hasSubmitted} onClick={this.decreaseBrushSize}>-</button>
 				<button className="brush-size-change" disabled={this.props.hasSubmitted} onClick={this.increaseBrushSize}>+</button>
 				<button disabled={this.props.hasSubmitted} onClick={this.undoLastMove}>Undo</button>
 				<button disabled={this.props.hasSubmitted} onClick={this.clearDrawingBoard}>Clear drawing</button>
-				<button className="submit-drawing" disabled={this.props.hasSubmitted} onClick={this.onSubmit}>Submit drawing</button>
+				<button className="submit-drawing" disabled={this.props.hasSubmitted} onClick={this.onSubmit}>{submitText}</button>
 			</div>
 		);
 	}

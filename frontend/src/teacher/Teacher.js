@@ -29,6 +29,7 @@ class Teacher extends Component {
 			prompt: null,
 			questionType: null,
 			placeholder: null,
+			isQuizEnded: false,
 		};
 
 		this.setAllStudentsList();
@@ -85,6 +86,12 @@ class Teacher extends Component {
 		socket.on("question vote", (data) => {
 			this.setState({
 				answers: data.answers,
+			});
+		});
+
+		socket.on('quiz end', () => {
+			this.setState({
+				isQuizEnded: true,
 			});
 		});
 	}
@@ -225,7 +232,7 @@ class Teacher extends Component {
 						answers={this.state.answers}
 						onNextQuestion={this.onNextQuestion}
 						onEndSubmission={this.onEndSubmission}
-						onQuizEnd={this.onQuizEnd}>
+						isQuizEnded={this.state.isQuizEnded}>
 					</QuizView>
 				</div>
 			</div>

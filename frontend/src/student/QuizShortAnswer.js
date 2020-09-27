@@ -33,10 +33,11 @@ class QuizShortAnswer extends Component {
 	}
 
 	render() {
+		let submitText = this.props.hasSubmitted ? 'Submitted!' : 'Submit';
 		return (
 			<div className="quiz-short-answer">
 				<input disabled={this.props.hasSubmitted} ref={input => this.answerInput = input} type="text" placeholder={this.props.placeholder || 'no-placeholder'} value={this.state.value} onChange={this.onChange} />
-				<button disabled={this.props.hasSubmitted} ref={button => this.submitButton = button} onClick={this.onSubmit}>Submit</button>
+				<button disabled={this.props.hasSubmitted} ref={button => this.submitButton = button} onClick={this.onSubmit}>{submitText}</button>
 			</div>
 		);
 	}

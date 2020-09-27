@@ -16,8 +16,6 @@ class TeacherQuizView extends Component {
         this.state = {
             allowingSubmissions: true,
         };
-
-
     }
 
     getAnswers = () => {
@@ -54,9 +52,14 @@ class TeacherQuizView extends Component {
 
     render() {
         return (
-            <div className="teacher-quiz-view">
+            <div className={"teacher-quiz-view " + (this.props.isQuizEnded ? 'quiz-ended' : 'quiz-ongoing')}>
                 <div className="left-side">
                     <div className="quiz-question">
+                        <div className="quiz-ended-message">
+                            <div className="prompt"> {/* HACK: misusing prompt class */}
+                                <h2>Quiz ended!</h2>
+                            </div>
+                        </div>
                         <div className="prompt">
                             <h2>Q: {this.props.prompt}</h2>
                         </div>
@@ -64,7 +67,7 @@ class TeacherQuizView extends Component {
                             <VoteGallery prompt={this.props.prompt} type={this.props.type} answers={this.props.answers} onVote={null}/>
                         </div>
                         <div className={"teacher-quiz-view-control-buttons " + (this.state.allowingSubmissions ? "submission-period" : "voting-period")}>
-                            <button onClick={this.handleEndSubmissions}>End Submissions</button>
+                            <button onClick={this.handleEndSubmissions}>Close Submissions</button>
                             <button onClick={this.handleNextQuestion}>Next Question</button>
                         </div>
                     </div>

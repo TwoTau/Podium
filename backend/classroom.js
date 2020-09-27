@@ -40,10 +40,6 @@ class Classroom {
 		socket.on('end submission', () => {
 			this.endSubmission()
 		});
-
-		socket.on('end quiz', () => {
-			this.endQuiz()
-		});
 	}
 
 	addStudent(socket, username) {
@@ -117,7 +113,11 @@ class Classroom {
 		this.currQuestion++;
 		this.answers = [];
 		this.state = 'question submission';
-		this.sendAll('new question', this.quiz.questions[this.currQuestion]);
+		if (this.currQuestion < this.quiz.questions.length) {
+			this.sendAll('new question', this.quiz.questions[this.currQuestion]);
+		} else {
+			this.endQuiz();
+		}
 	}
 
 	endSubmission() {
@@ -136,6 +136,7 @@ class Classroom {
 	}
 
 	endQuiz() {
+		console.log(`Quiz of teacher ${this.teacherName} ended`);
 		this.quiz = {};
 		this.state = 'quiz ended';
 		this.sendAll('quiz end');
