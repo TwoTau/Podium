@@ -78,8 +78,14 @@ class Teacher extends Component {
 			let { student, answer } = data;
 			this.setState((state) => ({
 				studentsAnswered: [...state.studentsAnswered, student],
-				answers: [...state.answers, { answer, student }],
+				answers: [...state.answers, { answer, student, votes: 0 }],
 			}));
+		});
+
+		socket.on("question vote", (data) => {
+			this.setState({
+				answers: data.answers,
+			});
 		});
 	}
 
